@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="~{front/include::link}">
+</head>
+<body>
+
+<header th:replace="~{front/include::header}"></header>
+
+
+
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="bread-inner">
+                    <ul class="bread-list">
+                        <li><a href="/index">Home<i class="ti-arrow-right"></i></a></li>
+                        <li class="active"><a href="#">My Addresses</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="shop section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 mb-4">
+                <div class="account-sidebar">
+                    <h6 class="sidebar-title">DASHBOARD</h6>
+                    <div class="sidebar-list">
+                        <a href="/my/orders"><i class="far fa-shopping-bag"></i> Orders
+                            <span>10</span></a>
+                        <a href="wishlist.html"><i class="far fa-heart"></i> Wishlist <span>20</span></a>
+                        <a href="support-ticket.html"><i class="far fa-headset"></i> Support Tickets <span>2</span></a>
+                    </div>
+                    <h6 class="sidebar-title mt-4">PROFILE SETTINGS</h6>
+                    <div class="sidebar-list">
+                        <a href="/my/profile"><i class="far fa-user"></i> Profile Info</a>
+                        <a href="/my/address" class="active"><i class="far fa-map-marker-alt"></i> Addresses <span>20</span></a>
+                        <a href="payment-method.html"><i class="far fa-credit-card"></i> Payment Methods <span>2</span></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="account-content">
+                    <div class="d-flex justify-content-between mb-3">
+                        <h4 class="account-content-title"><i class="far fa-map-marker-alt"></i> My Address</h4>
+                        <a href="/my/address/add" class="profile-btn">Add Address</a>
+                    </div>
+                    <div class="account-content-table">
+                        <div class="table-responsive">
+                            <table class="table table-borderless">
+                                <tr>
+                                    <th>id</th>
+                                    <th>Name</th>
+                                    <th>Address</th>
+                                    <th>Phone</th>
+                                    <th>isDefault</th>
+                                    <th>Action</th>
+                                </tr>
+                                <tr class="account-order-list" th:each="address:${userAddressList}">
+                                    <td th:text="${address.id}"></td>
+                                    <td><b th:text="${address.receiver}"></b></td>
+                                    <!--FIXME:这次加载无法读取-->
+                                    <td th:text="${address.address.addressStr+address.detail}"></td>
+                                    <td th:text="${address.phone}"></td>
+                                    <td th:text="${address.isDefault}"></td>
+                                    <td>
+                                        <a href="#" class="content-action content-action-mr " ><i class="far fa-pen"></i></a>
+                                        <a href="#" class="content-action delete-action" th:data-addr-id="${address.id}"><i class="far fa-trash"></i></a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<footer th:replace="~{front/include::footer}"></footer>
+
+<div th:replace="~{front/include::script}"></div>
+<script th:src="@{/static/front/js/address-list.js}"></script>
+<script th:inline="javascript">
+    let addressList = /*[[${userAddressList}]]*/{};
+    console.log(addressList);
+</script>
+</body>
+</html>

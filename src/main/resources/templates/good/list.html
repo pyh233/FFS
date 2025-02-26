@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/static/lib/layui/css/layui.css}">
+    <script th:src="@{/static/lib/layui/layui.js}"></script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/static/admin/good/list.css}">
+    <script th:src="@{/static/admin/good/list.js}"></script>
+    <script th:inline="javascript">
+        let ctx = /*[[@{/}]]*/"";
+        if (ctx.endsWith("/")) {
+            ctx = ctx.substring(0, ctx.length - 1);
+        }
+    </script>
+</head>
+<body>
+<form id="search-form" lay-filter="search-form" class="layui-form">
+    <div class="layui-form-item layui-input-inline">
+        <label class="layui-form-label">id:</label>
+        <div class="layui-input-inline">
+            <input type="text" name="id" placeholder="请输入id" autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item layui-input-inline">
+        <label class="layui-form-label">商品编号:</label>
+        <div class="layui-input-inline">
+            <input type="text" name="skuNo" placeholder="请输入商品编号" autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item layui-input-inline">
+        <label class="layui-form-label">商品名称:</label>
+        <div class="layui-input-inline">
+            <input type="text" name="name" placeholder="请输入商品名称" autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item layui-input-inline">
+        <label class="layui-form-label">商品类别:</label>
+        <div class="layui-input-inline">
+            <input type="text" name="categoryName" readonly placeholder="请选择商品类别" autocomplete="off"
+                   class="layui-input">
+            <input type="text" name="categoryId" hidden>
+        </div>
+    </div>
+    <div class="layui-form-item layui-input-inline">
+        <label class="layui-form-label">品牌:</label>
+        <div class="layui-input-inline">
+            <input type="text" name="brandName"  readonly placeholder="请选择品牌" autocomplete="off"
+                   class="layui-input">
+            <input type="text" name="brandId" hidden>
+        </div>
+    </div>
+</form>
+<div class="data-grid">
+    <table id="goodTable" lay-filter="goodTable"></table>
+</div>
+<!--表格工具栏-->
+<script type="text/html" id="toolbar">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="add">
+            <i class="layui-icon layui-icon-add-circle"></i>新增
+        </button>
+
+        <button class="layui-btn layui-btn-sm" lay-event="edit">
+            <i class="layui-icon layui-icon-edit"></i>修改
+        </button>
+
+        <button class="layui-btn layui-btn-sm" lay-event="reset">
+            <i class="layui-icon layui-icon-edit"></i>重置
+        </button>
+
+        <button class="layui-btn layui-btn-sm" lay-event="search">
+            <i class="layui-icon layui-icon-search"></i>查询
+        </button>
+
+        <button class="layui-btn layui-btn-sm layui-bg-red" lay-event="del">
+            <i class="layui-icon layui-icon-delete"></i>删除
+        </button>
+    </div>
+</script>
+<script type="text/html" id="tool">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="show" name="toolBtn">查看</button>
+        <button class="layui-btn layui-btn-sm" lay-event="edit" name="toolBtn">修改</button>
+        <button class="layui-btn layui-btn-sm layui-bg-red" lay-event="del" name="toolBtn">删除</button>
+    </div>
+</script>
+</body>
+</html>

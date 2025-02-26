@@ -1,0 +1,17 @@
+{
+  "imageActionName": "image",
+  "imageFieldName": "file",
+  "imageMaxSize": 10485760,
+  "imageAllowFiles": [
+    ".jpg",
+    ".png",
+    ".jpeg",
+    ".webp",
+    ".gif",
+    ".bmp"
+  ],
+  "imageCompressEnable": true,
+  "imageCompressBorder": 5000,
+  "imageInsertAlign": "none",
+  "imageUrlPrefix": ""
+}

@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script th:replace="~{front/include::link}"></script>
+</head>
+<body>
+
+<header th:replace="~{front/include::header}"></header>
+
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="bread-inner">
+                    <ul class="bread-list">
+                        <li><a href="/index">Home<i class="ti-arrow-right"></i></a></li>
+                        <li class="active"><a href="#">Register</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="shop login section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 mx-auto">
+                <div class="login-form">
+                    <h2>Create Your Account</h2>
+                    <p>Please fill all forms to continued</p>
+
+                    <form class="form" method="post" action="#">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label>Account<span>*</span></label>
+                                    <input type="text" name="account" placeholder="LauraBeard123" required="required">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label>Phone<span>*</span></label>
+                                    <input type="text" name="phone" placeholder="188XXXXXXXX" required="required">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label>Email<span>*</span></label>
+                                    <input type="email" name="email" placeholder="example@mail.com" required="required">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label>Password<span>*</span></label>
+                                    <input type="password" name="password" placeholder="********" required="required">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="agree">
+                                    <label class="form-check-label" for="agree">
+                                        I agree with the <a href="#" class="text-success">Terms & Conditions.</a>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group login-btn">
+                                    <button class="btn" type="button">Create Account</button>
+                                </div>
+                            </div>
+                            <p>Already have an account? <a href="/login">Login.</a></p>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="shop-newsletter py-5">
+    <div class="container">
+        <div class="inner-top">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2 col-12">
+
+                    <div class="inner">
+                        <h4>Newsletter</h4>
+                        <p> Subscribe to our newsletter and get <span>30%</span> off your first purchase</p>
+                        <form action="#" method="get" class="newsletter-inner">
+                            <input name="email" placeholder="Your email address" required="" type="email">
+                            <button class="btn">Subscribe <i class="fal fa-paper-plane"></i></button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer th:replace="~{front/include::footer}"></footer>
+
+
+<div>
+    <script th:replace="~{front/include::script}"></script>
+    <script th:src="@{/static/front/js/register.js}"></script>
+</div>
+</body>
+</html>

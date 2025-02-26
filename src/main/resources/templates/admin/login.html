@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+
+<html lang="en" class="material-style layout-fixed" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>FFShop</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="description"
+          content="Bhumlu Bootstrap admin template made using Bootstrap 4, it has tons of ready made feature, UI components, pages which completely fulfills any dashboard needs."/>
+    <meta name="keywords"
+          content="Bhumlu, bootstrap admin template, bootstrap admin panel, bootstrap 4 admin template, admin template">
+    <meta name="author" content="Srthemesvilla"/>
+    <link rel="icon" type="image/x-icon" th:href="@{/static/framework/img/favicon.ico}">
+
+    <!-- Google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+
+    <!-- Icon fonts -->
+    <link rel="stylesheet" th:href="@{/static/framework/fonts/fontawesome.css}">
+    <link rel="stylesheet" th:href="@{/static/framework/fonts/ionicons.css}">
+    <link rel="stylesheet" th:href="@{/static/framework/fonts/linearicons.css}">
+    <link rel="stylesheet" th:href="@{/static/framework/fonts/open-iconic.css}">
+    <link rel="stylesheet" th:href="@{/static/framework/fonts/pe-icon-7-stroke.css}">
+    <link rel="stylesheet" th:href="@{/static/framework/fonts/feather.css}">
+
+    <!-- Core stylesheets -->
+    <link rel="stylesheet" th:href="@{/static/framework/css/bootstrap-material.css}">
+    <link rel="stylesheet" th:href="@{/static/framework/css/shreerang-material.css}">
+    <link rel="stylesheet" th:href="@{/static/framework/css/uikit.css}">
+
+    <!-- Libs -->
+    <link rel="stylesheet" th:href="@{/static/framework/libs/perfect-scrollbar/perfect-scrollbar.css}">
+    <!-- Page -->
+    <link rel="stylesheet" th:href="@{/static/framework/css/pages/authentication.css}">
+
+    <link rel="stylesheet" th:href="@{/static/lib/layui/css/layui.css}">
+</head>
+
+<body>
+<!-- [ Preloader ] Start -->
+<div class="page-loader">
+    <div class="bg-primary"></div>
+</div>
+<!-- [ Preloader ] End -->
+
+<!-- [ content ] Start -->
+<div class="authentication-wrapper authentication-1 px-4">
+    <div class="authentication-inner py-5">
+
+        <!-- [ Logo ] Start -->
+        <div class="d-flex justify-content-center align-items-center">
+            <div class="ui-w-60">
+                <div class="w-100 position-relative">
+                    <img th:src="@{/static/framework/img/logo-dark.png}" alt="Brand Logo" class="img-fluid">
+                </div>
+            </div>
+        </div>
+        <!-- [ Logo ] End -->
+
+        <!-- [ Form ] Start -->
+        <form class="my-5 layui-form" id="login-form" lay-filter="login-form">
+            <div class="form-group">
+                <label class="form-label">account</label>
+                <input type="text" class="form-control" name="account" lay-verify="required">
+                <div class="clearfix"></div>
+            </div>
+            <div class="form-group">
+                <label class="form-label d-flex justify-content-between align-items-end">
+                    <span>Password</span>
+                    <!--TODO:forget passwd page-->
+                    <a href="/admin/forgot-password" class="d-block small">Forgot password?</a>
+                </label>
+                <input type="password" class="form-control" name="password" lay-verify="required">
+                <div class="clearfix"></div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">captcha</label>
+                <input type="text" class="form-control" name="captcha" lay-verify="required">
+                <div class="clearfix"></div>
+                <img class="captcha-img" th:src="@{/admin/captcha}">
+            </div>
+            <div class="d-flex justify-content-between align-items-center m-0">
+                <button type="button" class="btn btn-primary">Sign In</button>
+            </div>
+        </form>
+        <!-- [ Form ] End -->
+
+        <div class="text-center text-muted">
+            Don't have an account yet?
+            <a href="/admin/register">Sign Up</a>
+        </div>
+
+    </div>
+</div>
+<!-- [ content ] End -->
+
+<!-- Core scripts -->
+<script th:src="@{/static/framework/js/pace.js}"></script>
+<script th:src="@{/static/front/js/jquery-3.6.0.min.js}"></script>
+<!--NOTE:版本太低没有ajax?????-->
+<!--<script th:src="@{/static/framework/js/jquery-3.3.1.min.js}"></script>-->
+<script th:src="@{/static/framework/libs/popper/popper.js}"></script>
+<script th:src="@{/static/framework/js/bootstrap.js}"></script>
+<script th:src="@{/static/framework/js/sidenav.js}"></script>
+<script th:src="@{/static/framework/js/layout-helpers.js}"></script>
+<script th:src="@{/static/framework/js/material-ripple.js}"></script>
+
+<!-- Libs -->
+<script th:src="@{/static/framework/libs/perfect-scrollbar/perfect-scrollbar.js}"></script>
+
+<!-- Demo -->
+<script th:src="@{/static/framework/js/demo.js}"></script>
+<script th:src="@{/static/framework/js/analytics.js}"></script>
+
+
+<!--layui-->
+<script th:src="@{/static/lib/layui/layui.js}"></script>
+<script th:inline="javascript">
+    let ctx = /*[[@{/}]]*/"";
+    if (ctx.endsWith("/")) {
+        ctx = ctx.substring(0, ctx.length - 1);
+    }
+</script>
+<script th:src="@{/static/framework/js/pages/login.js}"></script>
+</body>
+
+</html>

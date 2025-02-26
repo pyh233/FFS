@@ -1,0 +1,23 @@
+body{
+    margin:10px;
+}
+
+.layui-btn{
+    background-color: #7dd35c;
+    border-radius: 20%;
+    width: 70px;
+    height: 36px;
+    font-size: 14px;
+}
+.layui-btn:hover{
+    background-color: #8daa63;
+    color: #111212;
+}
+
+[name="toolBtn"]{
+    width: 45px;
+    height: 25px;
+}
+.layui-btn-sm{
+    line-height: 10px !important;
+}

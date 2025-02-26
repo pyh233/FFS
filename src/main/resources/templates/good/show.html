@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/static/lib/layui/css/layui.css}">
+    <script th:src="@{/static/lib/layui/layui.js}"></script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/static/admin/good/show.css}">
+    <script th:src="@{/static/admin/good/show.js}"></script>
+    <script th:inline="javascript">
+        let ctx = /*[[@{/}]]*/"";
+        if (ctx.endsWith("/")) {
+            ctx = ctx.substring(0, ctx.length - 1);
+        }
+        let error = /*[[${error}]]*/"";
+        let showGood = /*[[${good}]]*/{};
+    </script>
+</head>
+<body>
+<form id="show-form" lay-filter="show-form" class="layui-form">
+    <div class="layui-form-item layui-input-inline">
+        <label class="layui-form-label">商品编号:</label>
+        <div class="layui-input-inline">
+            <input type="text" name="skuNo" readonly autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item layui-input-inline">
+        <label class="layui-form-label">商品名称:</label>
+        <div class="layui-input-inline">
+            <input type="text" name="name" readonly autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item layui-input-inline">
+        <label class="layui-form-label">商品别名:</label>
+        <div class="layui-input-inline">
+            <input type="text" name="alias" readonly autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item layui-input-inline">
+        <label class="layui-form-label">商品摘要:</label>
+        <div class="layui-input-inline">
+            <input type="text" name="summary" readonly autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item layui-input-inline">
+        <label class="layui-form-label">分类名称:</label>
+        <div class="layui-input-inline">
+            <input type="text" name="categoryName" readonly autocomplete="off"
+                   class="layui-input">
+            <input type="text" name="categoryId" hidden>
+        </div>
+    </div>
+    <div class="layui-form-item layui-input-inline">
+        <label class="layui-form-label">品牌名称:</label>
+        <div class="layui-input-inline">
+            <input type="text" name="brandName" readonly autocomplete="off"
+                   class="layui-input">
+            <input type="text" name="brandId" hidden>
+        </div>
+    </div>
+    <div class="layui-form-item layui-input-inline">
+        <label class="layui-form-label">建议售价:</label>
+        <div class="layui-input-inline">
+            <input type="text" name="markPrice" readonly autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item layui-input-inline">
+        <label class="layui-form-label">实际售价:</label>
+        <div class="layui-input-inline">
+            <input type="text" name="price" readonly autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item layui-input-inline">
+        <label class="layui-form-label">库存:</label>
+        <div class="layui-input-inline">
+            <input type="text" name="qty" readonly autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">主图:</label>
+        <div class="layui-input-inline">
+            <div class="layui-input-inline">
+                <div class="layui-upload-list">
+                    <img class="layui-upload-img" id="pic-upload-img" style="width: 132px; height: 122px;">
+                    <div class="pic-preview"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">其他细节图:</label>
+        <div class="layui-input-inline">
+            <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 11px;border: saddlebrown 2px solid;">
+                <div class="layui-upload-list" id="otherPic-upload-preview"></div>
+            </blockquote>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">简介:</label>
+        <div class="layui-input-inline">
+            <textarea name="description" autocomplete="off" class="layui-input" readonly
+                      style="height: 150px; width: 550px;border: saddlebrown 2px solid;"> </textarea>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">详情:</label>
+        <hr>
+        <div class="layui-input-block">
+            <div name="detail" autocomplete="off" class="layui-input"
+                 style="height: 250px; width: 550px;border: 0px"></div>
+        </div>
+    </div>
+</form>
+</body>
+</html>

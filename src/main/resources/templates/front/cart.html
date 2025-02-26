@@ -1,0 +1,165 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="~{front/include::link}"></th:block>
+</head>
+<body>
+<header th:replace="~{front/include::header}">
+</header>
+
+
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="bread-inner">
+                    <ul class="bread-list">
+                        <li><a href="/index">Home<i class="ti-arrow-right"></i></a></li>
+                        <li class="active"><a href="#">Cart</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="shopping-cart section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8" id="cartListShow">
+                <div class="shopping-cart-single" th:each="item:${cartList}">
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <img th:src="@{/static/{url}(url=${item.good.pic})}" alt="">
+                        </div>
+                        <div class="col-lg-10 my-auto">
+                            <div class="d-flex justify-content-between cart-title">
+                                <h6 th:text="${item.good.name}"></h6>
+                                <a href="" class="deleteFormMyCart" th:data-item-id="${item.id}"><i class="fal fa-times"></i></a>
+                            </div>
+                            <div class="d-flex justify-content-between mt-4">
+                                <div class="cart-price my-auto" th:text="'$'+${item.good.price}+' x 1 '">
+                                   这里是单价
+                                </div>
+                                <b th:text="'单品总价:$'+${item.qty * item.good.price}">
+                                    这里是初始化的单品总价
+                                </b>
+                                <div class="row g-0 cart-qty">
+                                    <!--添加数量，减少数量-->
+                                    <div class="col-auto">
+                                        <button type="button" class="minus cat-qty-btn"><i class="fal fa-minus "></i>
+                                        </button>
+                                    </div>
+                                    <div class="col-auto">
+                                        <input type="text" th:data-item-id="${item.id}" th:id="${item.good.id}" class="input-number" readonly data-min="1"
+                                               data-max="1000" th:value="${item.qty}">
+                                    </div>
+                                    <div class="col-auto">
+                                        <button type="button" class="plus cat-qty-btn"><i class="fal fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--购物车列表项模板-->
+            <div id="cart-item-template" class="shopping-cart-single" th:each="item:${cartList}" style="display:none;">
+                <div class="row">
+                    <div class="col-lg-2">
+                        <!--pic-->
+                        <img alt="">
+                    </div>
+                    <div class="col-lg-10 my-auto">
+                        <div class="d-flex justify-content-between cart-title">
+                            <!--name-->
+                            <h6></h6>
+                            <!--delete-->
+                            <a href="" class="deleteFormMyCart"><i class="fal fa-times"></i></a>
+                        </div>
+                        <div class="d-flex justify-content-between mt-4">
+                            <div class="cart-price my-auto">
+                                这里是单价
+                            </div>
+                            <b>
+                                这里是初始化的单品总价
+                            </b>
+                            <div class="row g-0 cart-qty">
+                                <div class="col-auto">
+                                    <button type="button" class="minus cat-qty-btn"><i class="fal fa-minus "></i>
+                                    </button>
+                                </div>
+                                <div class="col-auto">
+                                    <input type="text" class="input-number" readonly data-min="1"
+                                           data-max="1000">
+                                </div>
+                                <div class="col-auto">
+                                    <button type="button" class="plus cat-qty-btn"><i class="fal fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-lg-4">
+                <div class="coupon-area">
+                    <form action="#">
+                        <input type="text" placeholder="Apply your coupon">
+                        <button class="coupon-apply-btn">Apply Now</button>
+                    </form>
+                </div>
+
+                <div class="cart-total-amount">
+                    <ul>
+                        <li>Cart Subtotal<span>$250.00</span></li>
+                        <li>Shipping<span class="ship">Free</span></li>
+                        <li>Discount<span class="discount">$10.00</span></li>
+                        <li>Tax<span class="tax">$20.00</span></li>
+                        <li class="last">You Pay<span>$260.00</span></li>
+                    </ul>
+                    <div class="checkout-section">
+                        <a href="" class="btn checkout-btn">Checkout</a>
+                        <a href="/shop-list" class="btn">Continue shopping</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<section class="shop-newsletter py-5">
+    <div class="container">
+        <div class="inner-top">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2 col-12">
+
+                    <div class="inner">
+                        <h4>Newsletter</h4>
+                        <p> Subscribe to our newsletter and get <span>30%</span> off your first purchase</p>
+                        <form action="#" method="get" class="newsletter-inner">
+                            <input name="email" placeholder="Your email address" required="" type="email">
+                            <button class="btn">Subscribe <i class="fal fa-paper-plane"></i></button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer th:replace="~{front/include::footer}">
+</footer>
+
+<div>
+    <th:block th:replace="~{front/include::script}"></th:block>
+    <script th:src="@{/static/front/js/cartlist.js}"></script>
+    <script th:inline="javascript">
+        let cartlist = /*[[${cartList}]]*/{};
+    </script>
+</div>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!--导入layui-->
+    <link rel="stylesheet" th:href="@{/static/lib/layui/css/layui.css}">
+    <script th:src="@{/static/lib/layui/layui.js}"></script>
+    <script th:inline="javascript">
+        let ctx = /*[[@{/}]]*/"";
+        if (ctx.endsWith("/")) {
+            ctx = ctx.substring(0, ctx.length - 1);
+        }
+    </script>
+    <!--导入自己的格式和js文件-->
+    <link rel="stylesheet" th:href="@{/static/admin/brand/list.css}">
+    <script th:src="@{/static/admin/brand/list.js}"></script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--上方搜索表单-->
+<form id="search-form" class="layui-form" lay-filter="search-form">
+    <div class="layui-form-item layui-inline">
+        <label class="layui-form-label">ID:</label>
+        <div class="layui-input-inline">
+            <input type="text" name="id" autocomplete="off" class="layui-input" placeholder="请输入id">
+        </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+        <label class="layui-form-label">name:</label>
+        <div class="layui-input-inline">
+            <input type="text" name="name" autocomplete="off" class="layui-input" placeholder="请输入">
+        </div>
+    </div>
+</form>
+<div class="data-grid">
+    <table id="tbl" lay-filter="tbl"></table>
+</div>
+<!--表格工具栏-->
+<script type="text/html" id="toolbar">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="add">
+            <i class="layui-icon layui-icon-add-circle"></i>新增</button>
+
+        <button class="layui-btn layui-btn-sm" lay-event="edit">
+            <i class="layui-icon layui-icon-edit"></i>修改</button>
+
+        <button class="layui-btn layui-btn-sm" lay-event="search">
+            <i class="layui-icon layui-icon-search"></i>查询</button>
+
+        <button class="layui-btn layui-btn-sm" lay-event="reset">
+            <i class="layui-icon layui-icon-fonts-clear"></i>重置</button>
+
+        <button class="layui-btn layui-btn-sm layui-bg-red" lay-event="del">
+            <i class="layui-icon layui-icon-delete"></i>删除</button>
+    </div>
+</script>
+</body>
+</html>

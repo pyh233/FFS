@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="~{front/include::link}">
+</head>
+<style>
+    .profile-img>img{
+        width: 80px;
+        height: 80px;
+    }
+</style>
+<body>
+
+<header th:replace="~{front/include::header}"></header>
+
+
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="bread-inner">
+                    <ul class="bread-list">
+                        <li><a href="/index">Home<i class="ti-arrow-right"></i></a></li>
+                        <li class="active"><a href="#">Edit Profile</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="shop section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 mb-4">
+                <div class="account-sidebar">
+                    <h6 class="sidebar-title">DASHBOARD</h6>
+                    <div class="sidebar-list">
+                        <a href="/my/orders" class="active"><i class="far fa-shopping-bag"></i> Orders
+                            <span>10</span></a>
+                        <a href="wishlist.html"><i class="far fa-heart"></i> Wishlist <span>20</span></a>
+                        <a href="support-ticket.html"><i class="far fa-headset"></i> Support Tickets <span>2</span></a>
+                    </div>
+                    <h6 class="sidebar-title mt-4">PROFILE SETTINGS</h6>
+                    <div class="sidebar-list">
+                        <a href="/my/profile"><i class="far fa-user"></i> Profile Info</a>
+                        <a href="/my/address"><i class="far fa-map-marker-alt"></i> Addresses <span>20</span></a>
+                        <a href="payment-method.html"><i class="far fa-credit-card"></i> Payment Methods <span>2</span></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="account-content bg-white pt-0">
+                    <h4 class="account-content-title"><i class="far fa-user"></i> Edit Profile</h4>
+                    <div class="edit-profile">
+                        <form action="#">
+                            <div class="profile-img">
+                                <img th:if="${currentUser.avatar!=null}" th:src="@{/static/{url}(url=${currentUser.avatar})}" alt="">
+                                <img th:if="${currentUser.avatar==null}" th:src="@{/static/user_avatar/default.jpg}" alt="">
+                                <i class="fal fa-camera"></i>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label for="fname" class="form-label">Name:</label>
+                                        <input name="name" type="text" class="form-control" id="fname">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label for="sex" class="form-label">Sex:</label>
+                                        <select type="text" class="form-control" id="sex">
+                                            <option value="">不限</option>
+                                            <option value="男">男</option>
+                                            <option value="女">女</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn">Save Changes</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<footer th:replace="~{front/include::script}"></footer>
+
+<div th:include="~{front/include::script}"></div>
+<script th:src="@{/static/front/js/editprofile.js}"></script>
+</body>
+</html>

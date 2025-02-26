@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.flyfishshop.dao.GoodDao">
+    <sql id="Columns">select id,
+                             sku_no,
+                             name,
+                             alias,
+                             summary,
+                             category_id,
+                             brand_id,
+                             mark_price,
+                             price,
+                             qty,
+                             pic,
+                             other_pics,
+                             detail,
+                             description
+                      from t_good
+    </sql>
+    <resultMap id="GoodMap" type="Good">
+        <result column="category_id" property="categoryId"/>
+        <result column="brand_id" property="brandId"/>
+        <association column="category_id" property="category"
+                     select="com.example.flyfishshop.dao.CategoryDao.findNodeById"></association>
+        <association column="brand_id" property="brand"
+                     select="com.example.flyfishshop.dao.BrandDao.findBrandById"></association>
+    </resultMap>
+    <select id="findAllGoods" resultMap="GoodMap">
+        <include refid="Columns"></include>
+        <where>
+            <if test="sg.skuNo!=null and sg.skuNo!=''">and sku_no =#{sg.skuNo}</if>
+            <if test="sg.name!=null and sg.name!=''">
+                <bind name="nameLike" value="'%'+sg.name+'%'"/>
+                and name like #{nameLike}
+            </if>
+            <if test="sg.brandId!=null">and brand_id=#{sg.brandId}</if>
+            <if test="ids!=null">
+                and category_id in <foreach collection="ids" open="(" close=")" separator="," item="id">#{id}</foreach>
+            </if>
+        </where>
+    </select>
+    <delete id="deleteGood" flushCache="true">
+        delete from t_good
+        where id in
+        <foreach collection="ids" open="(" close=")" separator="," item="id">#{id}</foreach>
+    </delete>
+    <select id="findGoodById" resultType="Good" useCache="true">
+        <include refid="Columns"></include>
+        <where>id=#{id}</where>
+    </select>
+    <insert id="addGood" flushCache="true">
+        insert into t_good(sku_no, name, alias, summary, category_id, brand_id, mark_price, price, qty, pic, other_pics,
+                           detail, description, created_time, created_by)
+        values (#{skuNo}, #{name}, #{alias}, #{summary}, #{categoryId}, #{brandId}, #{markPrice}, #{price}, #{qty},
+                #{pic},
+                #{otherPics}, #{detail}, #{description}, #{createdTime}, #{createdBy})
+    </insert>
+    <update id="updateGood" flushCache="true">
+        update t_good
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="alias != null and alias != ''">
+                alias = #{alias},
+            </if>
+            <if test="summary != null and summary != ''">
+                summary = #{summary},
+            </if>
+            <if test="categoryId != null">
+                category_id = #{categoryId},
+            </if>
+            <if test="brandId != null">
+                brand_id = #{brandId},
+            </if>
+            <if test="markPrice != null">
+                mark_price = #{markPrice},
+            </if>
+            <if test="price != null">
+                price = #{price},
+            </if>
+            <if test="qty != null">
+                qty = #{qty},
+            </if>
+            <if test="pic != null and pic != ''">
+                pic = #{pic},
+            </if>
+            <if test="otherPics != null and otherPics != ''">
+                other_pics = #{otherPics},
+            </if>
+            <if test="detail != null and detail != ''">
+                detail = #{detail},
+            </if>
+            <if test="description != null and description != ''">
+                description = #{description},
+            </if>
+            <if test="updatedTime != null">
+                updated_time = #{updatedTime},
+            </if>
+            <if test="updatedBy != null and updatedBy != ''">
+                updated_by = #{updatedBy}
+            </if>
+        </set>
+        <where>
+            id = #{id}
+        </where>
+    </update>
+</mapper>

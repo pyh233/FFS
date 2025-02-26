@@ -1,0 +1,28 @@
+body {
+    margin: 8px;
+}
+
+#avatar-upload-btn {
+    width: 120px;
+}
+
+.avatar-preview {
+    width: 120px;
+    height: 120px;
+    border: 1px solid #ccc;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+    margin-top: 4px;
+    margin-left: 20px;
+}
+
+.layui-btn{
+    background-color: #7dd35c;
+}
+.layui-progress{
+!important;
+    width: 28%;
+    margin-top: 10px;
+    margin-left: 16px;
+}

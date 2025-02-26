@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.flyfishshop.dao.AddressDao">
+    <cache type="org.mybatis.caches.caffeine.CaffeineCache" flushInterval="720000"/>
+    <!--查询所有省份-->
+    <select id="findAllProvince" resultType="Address" useCache="true">
+        select id, name as province
+        from v_addr_province
+    </select>
+    <!--查询省份ID下的所有市-->
+    <select id="getAllCity" resultType="Address" useCache="true">
+        select id, name as city
+        from v_addr_city
+        where parent_id = #{provinceId}
+    </select>
+    <!--查询市ID下所有区-->
+    <select id="getAllArea" resultType="Address" useCache="true">
+        select id, name as area
+        from v_addr_area
+        where parent_id = #{cityId}
+    </select>
+    <!--查询区ID下所有街道-->
+    <select id="getAllStreet" resultType="Address" useCache="true">
+        select id, name as street
+        from v_addr_street
+        where parent_id = #{areaId}
+    </select>
+
+    <!--根据streetId向上查询地址链-->
+    <resultMap id="addressMap" type="Address">
+        <id column="cri_id" property="id"/>
+        <result column="cri_name" property="name"/>
+        <result column="cri_parent_id" property="parentId"/>
+        <association column="cri_parent_id" property="parent"
+                     select="com.example.flyfishshop.dao.AddressDao.findById"/>
+    </resultMap>
+    <!--向上查询-->
+    <select id="findById" resultMap="addressMap" useCache="true">
+        select cri_id, cri_parent_id, cri_name
+        from t_cn_region_info
+        where cri_id = #{id}
+    </select>
+</mapper>

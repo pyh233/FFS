@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!--layui-->
+    <link rel="stylesheet" th:href="@{/static/lib/layui/css/layui.css}">
+    <script th:src="@{/static/lib/layui/layui.js}"></script>
+    <meta charset="UTF-8">
+    <title>添加</title>
+    <!--导入自己的css和js-->
+    <link rel="stylesheet" th:href="@{/static/admin/order/add.css}">
+    <script th:src="@{/static/admin/order/edit.js}"></script>
+    <script th:inline="javascript">
+        let ctx = /*[[@{/}]]*/"";
+        if (ctx.endsWith("/")) {
+            ctx = ctx.substring(0, ctx.length - 1);
+        }
+        let editOrder = /*[[${editOrder}]]*/{};
+        let error = /*[[${error}]]*/"";
+    </script>
+</head>
+<body>
+<form class="layui-form" id="edit-form" lay-filter="edit-form">
+    <div class="layui-form-item">
+        <label class="layui-form-label">收件人:</label>
+        <div class="layui-input-block">
+            <input type="text" name="receiver" autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">收件人手机:</label>
+        <div class="layui-input-block">
+            <input type="text" name="receiverPhone" placeholder="" autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">收件人地址:</label>
+        <div class="layui-input-block">
+            <input type="text" name="receiverDetailAddress" placeholder="" autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+</form>
+</body>
+</html>

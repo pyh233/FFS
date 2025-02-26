@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.flyfishshop.dao.OrderDao">
+    <sql id="Columns">
+        select id,
+               order_no,
+               member_id,
+               state,
+               created_time,
+
+               total_pay,
+               receiver,
+               receiver_phone,
+               receiver_detail_address,
+               note,
+
+               pay_type,
+               pay_time,
+
+               put_time,
+               confirm_time,
+               apply_refund_time,
+               agree_refund_time,
+               refund_cause
+        from t_order
+    </sql>
+    <!--创建订单-->
+    <insert id="createOrder" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        insert into t_order(order_no, member_id, state, created_time)
+        values (#{orderNo}, #{memberId}, #{state}, #{createdTime})
+    </insert>
+    <!--保存订单项-->
+    <insert id="saveOrderItem" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into t_order_item(order_id, good_id, deal_price, count, product_name, product_pic, product_summary)
+        values (#{orderId}, #{goodId}, #{price}, #{count}, #{productName}, #{productPic}, #{productSummary})
+    </insert>
+    <!--根据id获取订单-->
+    <select id="getOrderById" resultType="Order">
+        <include refid="Columns"></include>
+        <where>id=#{id}</where>
+    </select>
+    <!--根据订单编号获取订单-->
+    <select id="getOrderByOrderNo" resultType="Order">
+        <include refid="Columns"></include>
+        <where>order_no=#{orderNo}</where>
+    </select>
+    <!--根据订单id获取订单项-->
+    <select id="getOrderItemsByOrderId" resultType="ItemInOrder">
+        select id,
+               order_id,
+               good_id,
+               count,
+               product_name,
+               product_pic,
+               product_summary,
+               deal_price as price
+        from t_order_item
+        where order_id = #{orderId}
+    </select>
+    <!--完善订单信息-->
+    <update id="patchOrder">
+        update t_order
+        <set>
+            <if test="totalPay!=null">
+                total_pay=#{totalPay},
+            </if>
+            <if test="note!=null and note!=''">
+                note=#{note},
+            </if>
+            <if test="receiver!=null and receiver!=''">
+                receiver=#{receiver},
+            </if>
+            <if test="receiverPhone!=null and receiverPhone!=''">
+                receiver_phone=#{receiverPhone},
+            </if>
+            <if test="receiverDetailAddress!=null and receiverDetailAddress!=''">
+                receiver_detail_address=#{receiverDetailAddress},
+            </if>
+            <if test="payType!=null and payType!=''">
+                pay_type=#{payType}
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+    <update id="patchPay">
+        update t_order
+        <set>
+            <if test="state!=null">
+                state=#{state},
+            </if>
+            <if test="payTime!=null">
+                pay_time=#{payTime}
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+    <!--获取用户所有订单-->
+    <select id="getAllOrdersByUserId" resultType="Order">
+        <include refid="Columns"></include>
+        where member_id=#{userId}
+    </select>
+
+    <!--收货-->
+    <update id="finishOrder">
+        update t_order
+        set confirm_time=#{confirmTime},state=#{state}
+        where id = #{id}
+    </update>
+    <!--退款-->
+    <update id="refundOrder">
+        update t_order
+        set state=#{state},
+            apply_refund_time=#{applyRefundTime},
+            refund_cause=#{refundCause}
+        where id = #{id}
+    </update>
+    <!--查询用户最新的一笔未支付订单-->
+    <select id="getUserLatestOrderNotPay" resultType="Order">
+        <include refid="Columns"></include>
+        <where>member_id=#{userId} and state="NOT_PAY"</where>
+        order by created_time desc limit 1
+    </select>
+
+    <!--=========================================================================================-->
+
+    <resultMap id="orderListMap" type="SearchOrderModel">
+        <result column="member_id" property="memberId"></result>
+        <association property="account" column="member_id"
+                     select="com.example.flyfishshop.dao.OrderDao.temSelectAccount"></association>
+    </resultMap>
+    <select id="temSelectAccount" resultType="String">
+        select account
+        from t_member
+        where id = #{memberId}
+    </select>
+    <!--查询所有订单-->
+    <select id="getOrderList" resultMap="orderListMap">
+        <include refid="Columns"></include>
+        <where>
+            <if test="orderNo!=null and orderNo!=''">
+                and order_no = #{orderNo}
+            </if>
+            <if test="memberId!=null">
+                and member_id = #{memberId}
+            </if>
+            <if test="state!=null">
+                and state=#{state}
+            </if>
+            <if test="receiver!=null and receiver!=''">
+                and receiver=#{receiver}
+            </if>
+            <if test="receiverPhone!=null and receiverPhone!=''">
+                and receiver_phone=#{receiverPhone}
+            </if>
+        </where>
+    </select>
+    <!--发货请求-->
+    <update id="putOrder">
+        update t_order
+        set state=#{state},
+            put_time=#{putTime}
+        where id = #{id}
+    </update>
+    <!--接受退款请求-->
+    <update id="agreeRefund">
+        update t_order
+        set state=#{state},
+            agree_refund_time=#{agreeRefundTime}
+        where id=#{id}
+    </update>
+</mapper>

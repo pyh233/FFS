@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/static/lib/layui/css/layui.css}">
+    <script th:src="@{/static/lib/layui/layui.js}"></script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/static/admin/good/add.css}">
+    <script th:src="@{/static/admin/good/edit.js}"></script>
+    <script th:inline="javascript">
+        let ctx = /*[[@{/}]]*/"";
+        if (ctx.endsWith("/")) {
+            ctx = ctx.substring(0, ctx.length - 1);
+        }
+        let error = /*[[${error}]]*/"";
+        let editGood = /*[[${good}]]*/{};
+    </script>
+</head>
+<body>
+<form id="edit-form" lay-filter="edit-form" class="layui-form">
+    <div class="layui-form-item layui-input-inline">
+        <label class="layui-form-label">商品编号:</label>
+        <div class="layui-input-inline">
+            <input type="text" name="skuNo" lay-verify="required" readonly placeholder="请输入商品编号" autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item layui-input-inline">
+        <label class="layui-form-label">商品名称:</label>
+        <div class="layui-input-inline">
+            <input type="text" name="name" placeholder="请输入商品名称" autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item layui-input-inline">
+        <label class="layui-form-label">商品别名:</label>
+        <div class="layui-input-inline">
+            <input type="text" name="alias" placeholder="请输入商品别名" autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item layui-input-inline">
+        <label class="layui-form-label">商品摘要:</label>
+        <div class="layui-input-inline">
+            <input type="text" name="summary" placeholder="请输入商品摘要" autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item layui-input-inline">
+        <label class="layui-form-label">分类名称:</label>
+        <div class="layui-input-inline">
+            <input type="text" name="categoryName" readonly placeholder="请选择分类" autocomplete="off"
+                   class="layui-input">
+            <input type="text" name="categoryId" hidden>
+        </div>
+    </div>
+    <div class="layui-form-item layui-input-inline">
+        <label class="layui-form-label">品牌名称:</label>
+        <div class="layui-input-inline">
+            <input type="text" name="brandName" placeholder="请选择品牌" autocomplete="off"
+                   class="layui-input">
+            <input type="text" name="brandId" hidden>
+        </div>
+    </div>
+    <div class="layui-form-item layui-input-inline">
+        <label class="layui-form-label">建议售价:</label>
+        <div class="layui-input-inline">
+            <input type="text" name="markPrice" lay-verify="required" placeholder="请输入建议售价" autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item layui-input-inline">
+        <label class="layui-form-label">实际售价:</label>
+        <div class="layui-input-inline">
+            <input type="text" name="price" lay-verify="required" placeholder="请输入实际售价" autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item layui-input-inline">
+        <label class="layui-form-label">库存:</label>
+        <div class="layui-input-inline">
+            <input type="text" name="qty" placeholder="请输入库存" autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">主图:</label>
+        <div class="layui-input-inline">
+            <button type="button" class="layui-btn" id="main-pic-upload-btn">
+                <i class="layui-icon layui-icon-upload"></i> 单图片上传
+            </button>
+            <div class="layui-input-inline">
+                <div class="layui-upload-list">
+                    <img class="layui-upload-img" id="pic-upload-img" style="width: 132px; height: 122px;">
+                    <div class="pic-preview"></div>
+                </div>
+                <div class="layui-progress layui-progress-big" lay-showPercent="yes" lay-filter="filter-demo">
+                    <div class="layui-progress-bar" lay-percent=""></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">其他细节图:</label>
+        <div class="layui-input-inline">
+            <button type="button" class="layui-btn" id="otherPics-upload-btn">
+                <i class="layui-icon layui-icon-upload"></i> 多图片上传
+            </button>
+            <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 11px;border: saddlebrown 2px solid;">
+                上传图片预览,单击图片删除:
+                <div class="layui-upload-list" id="otherPic-upload-preview"></div>
+            </blockquote>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">简介:</label>
+        <div class="layui-input-inline">
+            <textarea name="description" autocomplete="off" class="layui-input"
+                      style="height: 150px; width: 550px;border: saddlebrown 2px solid;"> </textarea>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">详情:</label>
+        <div class="layui-input-block">
+            <script id="editor" type="text/plain" style="height:400px;margin-left: 20px;border: saddlebrown 1px solid;"></script>
+            <script type="text/javascript" th:src="@{/static/lib/ueditor/ueditor.config.js}"></script>
+            <script type="text/javascript" th:src="@{/static/lib/ueditor/ueditor.all.js}"></script>
+        </div>
+    </div>
+</form>
+</body>
+</html>

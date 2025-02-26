@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script th:replace="~{front/include::link}"></script>
+</head>
+<body>
+
+<header th:replace="~{front/include::header}"></header>
+
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="bread-inner">
+                    <ul class="bread-list">
+                        <li><a href="/index">Home<i class="ti-arrow-right"></i></a></li>
+                        <li class="active"><a href="#">Login</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="shop login section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 mx-auto">
+                <div class="login-form">
+                    <h2>Welcome To F.F.S.</h2>
+                    <p>Login with account & password</p>
+
+                    <form id="login-form" class="form" method="post" action="#">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label>Account or Phone Number<span>*</span></label>
+                                    <input type="text" name="account" placeholder="abc123..." lay-verify="required">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label>Password<span>*</span></label>
+                                    <input type="password" name="password" placeholder="********" lay-verify="required">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="d-flex justify-content-between">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="remember">
+                                        <label class="form-check-label" for="remember">
+                                            Remember Me
+                                        </label>
+                                    </div>
+                                    <a href="/forgot-pw" class="lost-pass">Forgot Password?</a>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group login-btn">
+                                    <button id="login-btn" class="btn" type="submit">Login</button>
+                                </div>
+                            </div>
+                            <div class="login-divider">or</div>
+                            <div class="d-flex social-login">
+                                <a class="btn f-btn" type="submit"> <i class="fab fa-facebook-f"></i> Facebook</a>
+                                <a class="btn g-btn" type="submit"> <i class="fab fa-google"></i> Google</a>
+                            </div>
+                            <p>Don't have an account? <a href="/register">Register.</a></p>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<footer th:replace="~{front/include::footer}"></footer>
+
+<div>
+    <script th:replace="~{front/include::script}"></script>
+
+    <script th:src="@{/static/front/js/login.js}"></script>
+</div>
+</body>
+</html>

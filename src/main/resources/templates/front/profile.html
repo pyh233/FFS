@@ -1,0 +1,164 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="~{front/include::link}">
+</head>
+<style>
+    .profile-sidebar > img {
+        width: 80px;
+        height: 80px;
+    }
+</style>
+<body>
+
+<header th:replace="~{front/include::header}"></header>
+
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="bread-inner">
+                    <ul class="bread-list">
+                        <li><a href="/index">Home<i class="ti-arrow-right"></i></a></li>
+                        <li class="active"><a href="#">My Profile</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="shop section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 mb-4">
+                <div class="account-sidebar">
+                    <h6 class="sidebar-title">DASHBOARD</h6>
+                    <div class="sidebar-list">
+                        <a href="/my/orders"><i class="far fa-shopping-bag"></i> Orders
+                            <span>10</span></a>
+                        <a href="wishlist.html"><i class="far fa-heart"></i> Wishlist <span>20</span></a>
+                        <a href="support-ticket.html"><i class="far fa-headset"></i> Support Tickets <span>2</span></a>
+                    </div>
+                    <h6 class="sidebar-title mt-4">PROFILE SETTINGS</h6>
+                    <div class="sidebar-list">
+                        <a href="/my/profile" class="active"><i class="far fa-user"></i> Profile Info</a>
+                        <a href="/my/address"><i class="far fa-map-marker-alt"></i> Addresses <span>20</span></a>
+                        <a href="payment-method.html"><i class="far fa-credit-card"></i> Payment Methods <span>2</span></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="account-content bg-white pt-0">
+                    <h4 class="account-content-title"><i class="far fa-user"></i> My Profile</h4>
+                    <div class="profile-info">
+                        <div class="row">
+                            <div class="col-lg-5 mb-4">
+                                <div class="profile-sidebar">
+                                    <img th:if="${currentUser.avatar!=null}" th:src="@{/static/{url}(url=${currentUser.avatar})}" alt="">
+                                    <img th:if="${currentUser.avatar==null}" th:src="@{/static/user_avatar/default.jpg}" alt="">
+
+                                    <div class="profile-title">
+                                        <div>
+                                            <h6 th:text="${currentUser.name}"></h6>
+                                            <p>Account : <span th:text="${currentUser.account}"> </span></p>
+                                        </div>
+                                        <div class="profile-status">
+                                            PREMIUM USER
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="row">
+                                    <div class="col-lg-4 mb-4">
+                                        <div class="profile-widget">
+                                            <b class="allOrdersCompleted">40</b>
+                                            <p>All Orders Completed</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 mb-4">
+                                        <div class="profile-widget">
+                                            <b class="allPendingOrders">10</b>
+                                            <p>All Pending Orders</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 mb-4">
+                                        <div class="profile-widget">
+                                            <b class="awaitingDelivery">20</b>
+                                            <p>Awaiting Delivery</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-details">
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <p>qq</p>
+                                <h6 th:text="${currentUser.qq}"></h6>
+                            </div>
+                            <div class="col-lg-2">
+                                <p>WeChat</p>
+                                <h6 th:text="${currentUser.wechat}"></h6>
+                            </div>
+                            <div class="col-lg-3">
+                                <p>Email</p>
+                                <h6><a href="/cdn-cgi/l/email-protection" class="__cf_email__"
+                                       th:text="${currentUser.email}"
+                                       data-cfemail="a6cbc3e6c2c9cbc7cfc888c5c9cb">[email&#160;protected]</a></h6>
+                            </div>
+                            <div class="col-lg-3">
+                                <p>Phone</p>
+                                <h6 th:text="${currentUser.phone}"></h6>
+                            </div>
+                            <div class="col-lg-2">
+                                <p>Join Date</p>
+                                <h6 th:text="${currentUser.createdTime}"></h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 mt-5">
+                        <a href="/my/profile/edit" class="profile-btn">Edit Profile</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<footer th:replace="~{front/include::footer}"></footer>
+<div th:replace="~{front/include::script}"></div>
+<script th:src="@{/static/front/js/profile.js}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+<script th:inline="javascript">
+
+    setTimeout("reNewNum()",2000);
+
+    function reNewNum(){
+        // TODO:查询三种订单数据
+        const allOrdersCompleted = $(".allOrdersCompleted")[0];
+        const allPendingOrders = $(".allPendingOrders")[0];
+        const awaitingDelivery = $(".awaitingDelivery")[0];
+        gsap.to(allOrdersCompleted, {
+            innerText: 100,
+            duration: 2,
+            snap: {innerText: 2},
+            ease: "power1.out"
+        });
+        gsap.to(allPendingOrders, {
+            innerText: 40,
+            duration: 2,
+            snap: {innerText: 1},
+            ease: "power1.out"
+        });
+        gsap.to(awaitingDelivery, {
+            innerText: 10,
+            duration: 2,
+            snap: {innerText: 2},
+            ease: "power1.out"
+        });
+    }
+</script>
+</body>
+</html>

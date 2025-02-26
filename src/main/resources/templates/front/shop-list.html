@@ -1,0 +1,416 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script th:replace="~{front/include::link}"></script>
+</head>
+<body>
+
+<header>
+    <th:block th:replace="~{front/include::header}"></th:block>
+</header>
+
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="bread-inner">
+                    <ul class="bread-list">
+                        <li><a href="/index">Home<i class="ti-arrow-right"></i></a></li>
+                        <li class="active"><a href="#">Shop List</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="product-area shop-sidebar shop section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-4 col-12">
+                <div class="shop-sidebar">
+
+                    <div class="single-widget category">
+                        <h3 class="title">Categories</h3>
+                        <ul class="categor-list">
+                            <li><a href="#">Fashion <span>(50)</span></a></li>
+                            <li><a href="#">Electronics <span>(15)</span></a></li>
+                            <li><a href="#">Bikes <span>(25)</span></a></li>
+                            <li><a href="#">Home & Garden <span>(100)</span></a></li>
+                            <li><a href="#">Gifts <span>(90)</span></a></li>
+                            <li><a href="#">Health & Beauty <span>(75)</span></a></li>
+                            <li><a href="#">Accessories <span>(10)</span></a></li>
+                        </ul>
+                    </div>
+
+
+                    <div class="single-widget range">
+                        <h3 class="title">Shop by Price</h3>
+                        <div class="price-filter">
+                            <div class="price-filter-inner">
+                                <div id="slider-range"></div>
+                                <div class="price_slider_amount">
+                                    <div class="label-input d-flex">
+                                        <span>Range:</span><input type="text" id="amount" name="price" readonly
+                                                                  placeholder="Add Your Price"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="single-widget">
+                        <h3 class="title">Brands</h3>
+                        <div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="brand1">
+                                <label class="form-check-label" for="brand1">
+                                    Leotiba
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="brand2">
+                                <label class="form-check-label" for="brand2">
+                                    Kasioli
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="brand3">
+                                <label class="form-check-label" for="brand3">
+                                    Tiolami
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="brand4">
+                                <label class="form-check-label" for="brand4">
+                                    Luasis
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="brand5">
+                                <label class="form-check-label" for="brand5">
+                                    Tiambo
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="brand6">
+                                <label class="form-check-label" for="brand6">
+                                    Jalibio
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="single-widget">
+                        <h3 class="title">Sales</h3>
+                        <div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="sale1">
+                                <label class="form-check-label" for="sale1">
+                                    On Sale
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="sale2">
+                                <label class="form-check-label" for="sale2">
+                                    In Stock
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="sale3">
+                                <label class="form-check-label" for="sale3">
+                                    Featured
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="sale4">
+                                <label class="form-check-label" for="sale4">
+                                    Trending
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="single-widget rating">
+                        <h3 class="title">Ratings</h3>
+                        <div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="rate1">
+                                <label class="form-check-label" for="rate1">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="rate2">
+                                <label class="form-check-label" for="rate2">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fal fa-star"></i>
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="rate3">
+                                <label class="form-check-label" for="rate3">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fal fa-star"></i>
+                                    <i class="fal fa-star"></i>
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="rate4">
+                                <label class="form-check-label" for="rate4">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fal fa-star"></i>
+                                    <i class="fal fa-star"></i>
+                                    <i class="fal fa-star"></i>
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="rate5">
+                                <label class="form-check-label" for="rate5">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fal fa-star"></i>
+                                    <i class="fal fa-star"></i>
+                                    <i class="fal fa-star"></i>
+                                    <i class="fal fa-star"></i>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="single-widget">
+                        <h3 class="title">Colors</h3>
+                        <div class="color">
+                            <a href="#"></a>
+                            <a href="#"></a>
+                            <a href="#"></a>
+                            <a href="#"></a>
+                            <a href="#"></a>
+                        </div>
+                    </div>
+
+
+                    <div class="single-widget">
+                        <h3 class="title">Size</h3>
+                        <div class="size">
+                            <a href="#">XS</a>
+                            <a href="#">SM</a>
+                            <a href="#">MD</a>
+                            <a href="#">LG</a>
+                            <a href="#">XL</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-9 col-md-8 col-12">
+
+                <div class="shop-top">
+                    <div class="row">
+                        <div class="col-lg-2 filter-single">
+                            <div class="filter-content">
+                                <div class="my-auto filter-title">Show :</div>
+                                <select>
+                                    <option selected="selected">10</option>
+                                    <option>20</option>
+                                    <option>30</option>
+                                    <option>50</option>
+                                    <option>100</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-8 filter-single">
+                            <div class="filter-content">
+                                <div class="my-auto filter-title">Sort By :</div>
+                                <select>
+                                    <option selected="selected">Latest</option>
+                                    <option>Latest</option>
+                                    <option>Trending</option>
+                                    <option>Popular</option>
+                                    <option>Price Hight To Low</option>
+                                    <option>Price Low To High</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 filter-single">
+                            <ul class="view-mode">
+                                <li><a href="shop-grid.html"><i class="fal fa-th-large"></i></a></li>
+                                <li class="active"><a href="shop-list.html"><i class="fal fa-th-list"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+                <!--商品列表-->
+                <div id="goodList" class="row">
+                    <!--初始化商品列表-->
+                    <div class="col-12 mt-4" th:each="good:${goodList}">
+                        <div class="single-product">
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div class="product-img">
+                                        <a th:href="@{/good-show(gid=${good.id})}">
+                                            <img class="product-img" th:src="@{/static/{url}(url=${good.pic})}" alt="#">
+                                            <span class="price-dec">30% Off</span>
+                                        </a>
+                                        <!--TODO:三种事件-->
+                                        <div class="button-head">
+                                            <div class="product-action">
+                                                <a data-bs-toggle="modal" data-bs-target="#staticBackdrop" href="#"><i
+                                                        class="far fa-eye"></i><span>Quick Shop</span></a>
+                                                <a href="#"><i class="far fa-heart"></i><span>Add to Wishlist</span></a>
+                                                <a href="#"><i
+                                                        class="far fa-exchange"></i><span>Add to Compare</span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-8">
+                                    <div class="product-content">
+                                        <h3><a th:href="@{/good-show(gid=${good.id})}" th:text="${good.name}"></a></h3>
+                                        <div class="product-rate">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                        </div>
+                                        <!--简介-->
+                                        <p class="my-2" th:text="${good.description}"></p>
+                                        <div class="d-flex justify-content-between mt-4">
+                                            <div class="product-price">
+                                                <span class="old" th:text="'$'+${good.markPrice}"></span>
+                                                <span th:text="'$'+${good.price}"></span>
+                                            </div>
+                                            <button th:data-good-id="${good.id}" class="product-cart-btn" type="button"><i
+                                                    class="fal fa-shopping-cart"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!--商品列表模板，可以用js填充替换上方初始化列表,不能放在goodList中因为要清除GoodList中内容-->
+                <div id="goodList-template" class="col-12 mt-4" style="display: none">
+                    <div class="single-product">
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="product-img">
+                                    <a href="#">
+                                        <!--TODO:pic-->
+                                        <img id="img-pic-template" class="product-img" alt="#">
+                                        <span class="price-dec">30% Off</span>
+                                    </a>
+                                    <!--TODO:三种事件-->
+                                    <div class="button-head">
+                                        <div class="product-action">
+                                            <a data-bs-toggle="modal" data-bs-target="#staticBackdrop" href="#"><i
+                                                    class="far fa-eye"></i><span>Quick Shop</span></a>
+                                            <a href="#"><i class="far fa-heart"></i><span>Add to Wishlist</span></a>
+                                            <a href="#"><i
+                                                    class="far fa-exchange"></i><span>Add to Compare</span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-8">
+                                <div class="product-content">
+                                    <!--TODO:a href to GoodShow-->
+                                    <h3><a></a></h3>
+                                    <div class="product-rate">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                    </div>
+                                    <!--TODO:简介-->
+                                    <p class="my-2"></p>
+                                    <div class="d-flex justify-content-between mt-4">
+                                        <div class="product-price">
+                                            <!--TODO:price-->
+                                            <span class="old"></span>
+                                            <span></span>
+                                        </div>
+                                        <button class="product-cart-btn" type="button"><i
+                                                class="fal fa-shopping-cart"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <!--分页导航-->
+                    <div class="pagination">
+                        <ul class="pagination-list">
+                            <li class="first"><a href="#">首页</a></li>
+                            <li class="prev"><a href="#"><i class="ti-arrow-left"></i></a></li>
+
+                            <!--数字分页-->
+                            <li th:each="p:${pages}"><a href="#" th:text="${p}"></a></li>
+                            <!--<li class="active"><a href="#">2</a></li>-->
+
+                            <li class="next"><a href="#"><i class="ti-arrow-right"></i></a></li>
+                            <li class="last"><a href="#">尾页</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+<section class="shop-newsletter py-5">
+    <div class="container">
+        <div class="inner-top">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2 col-12">
+
+                    <div class="inner">
+                        <h4>Newsletter</h4>
+                        <p> Subscribe to our newsletter and get <span>30%</span> off your first purchase</p>
+                        <form action="#" method="get" class="newsletter-inner">
+                            <input name="email" placeholder="Your email address" required="" type="email">
+                            <button class="btn">Subscribe <i class="fal fa-paper-plane"></i></button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section  >
+
+
+<footer>
+    <th:block th:replace="~{front/include::footer}"></th:block>
+</footer>
+
+<div>
+    <script th:replace="~{front/include::script}"></script>
+    <script th:src="@{/static/front/js/list.js}"></script>
+    <script th:inline="javascript">
+        let fgsm = /*[[${fgsm}]]*/{};
+        window.pi = /*[[${pageInfo}]]*/{};
+    </script>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.flyfishshop.dao.AdminDao">
+
+    <sql id="Columns">select id,
+                             account,
+                             password,
+                             avatar_url,
+                             description,
+                             last_login_time,
+                             last_login_ip,
+                             create_time,
+                             created_by,
+                             last_modify_time,
+                             last_modified_by
+                      from t_admin_user
+    </sql>
+
+    <select id="findAll" resultType="Admin">
+        <include refid="Columns"/>
+        <where>
+            <if test="id!=null">
+                and id = #{id}
+            </if>
+            <if test="account!=null and account!=''">
+                <bind name="accountLike" value="'%'+account+'%'"/>
+                and account like #{accountLike}
+            </if>
+        </where>
+    </select>
+    <delete id="delete">
+        delete from t_admin_user where id in
+        <foreach collection="ids" separator="," item="id" open="(" close=")">#{id}</foreach>
+    </delete>
+    <insert id="insert">
+        insert into t_admin_user(account, password, avatar_url, last_login_time, last_login_ip, description,
+                                 create_time, created_by, last_modify_time, last_modified_by)
+        values (#{account}, #{password}, #{avatarUrl}, #{lastLoginTime}, #{lastLoginIp}, #{description}, #{createTime},
+                #{createdBy}, #{lastModifyTime}, #{lastModifiedBy})
+    </insert>
+    <select id="findById" resultType="Admin">
+        <include refid="Columns"></include>
+        <where>id=#{id}</where>
+    </select>
+    <update id="update">
+        update t_admin_user
+        <set>
+            <if test="password != null and password != ''">
+                password = #{password},
+            </if>
+            <if test="avatarUrl != null and avatarUrl != ''">
+                avatar_url = #{avatarUrl},
+            </if>
+            <if test="lastLoginTime != null">
+                last_login_time = #{lastLoginTime},
+            </if>
+            <if test="lastLoginIp != null and lastLoginIp != ''">
+                last_login_ip = #{lastLoginIp},
+            </if>
+            <if test="description != null and description != ''">
+                description = #{description},
+            </if>
+            <if test="lastModifyTime != null">
+                last_modify_time = #{lastModifyTime},
+            </if>
+            <if test="lastModifiedBy != null and lastModifiedBy != ''">
+                last_modified_by = #{lastModifiedBy}
+            </if>
+        </set>
+        <where>id=#{id}</where>
+    </update>
+
+    <select id="login" resultType="Admin">
+        <include refid="Columns"></include>
+        <where>
+            account=#{account}
+        </where>
+    </select>
+</mapper>

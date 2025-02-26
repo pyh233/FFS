@@ -1,0 +1,176 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="~{front/include::link}"></th:block>
+    <style>
+        .fas {
+            transition: transform 0.3s ease; /* 添加过渡效果 */
+        }
+        .order-status{
+            cursor: pointer;
+        }
+        .generate-pic {
+            width: 40px;
+            height: 40px;
+        }
+    </style>
+</head>
+<body>
+
+<header th:replace="~{front/include::header}"></header>
+
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="bread-inner">
+                    <ul class="bread-list">
+                        <li><a href="/link">Home<i class="ti-arrow-right"></i></a></li>
+                        <li class="active"><a href="#">Orders List</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="shop section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 mb-4">
+                <div class="account-sidebar">
+                    <h6 class="sidebar-title">DASHBOARD</h6>
+                    <div class="sidebar-list">
+                        <a href="/my/orders" class="active"><i class="far fa-shopping-bag"></i> Orders
+                            <span>10</span></a>
+                        <a href="wishlist.html"><i class="far fa-heart"></i> Wishlist <span>20</span></a>
+                        <a href="support-ticket.html"><i class="far fa-headset"></i> Support Tickets <span>2</span></a>
+                    </div>
+                    <h6 class="sidebar-title mt-4">PROFILE SETTINGS</h6>
+                    <div class="sidebar-list">
+                        <a href="/my/profile"><i class="far fa-user"></i> Profile Info</a>
+                        <a href="/my/address"><i class="far fa-map-marker-alt"></i> Addresses <span>20</span></a>
+                        <a href="payment-method.html"><i class="far fa-credit-card"></i> Payment Methods <span>2</span></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="account-content">
+                    <h4 class="account-content-title"><i class="far fa-shopping-bag"></i> My Orders</h4>
+                    <div class="account-content-table">
+                        <div class="table-responsive">
+                            <table class="table table-borderless">
+                                <tr>
+                                    <th>Order #</th>
+                                    <th>Purchased Date</th>
+                                    <th>Receiver</th>
+                                    <th>Total</th>
+                                    <th>Status</th>
+                                    <th>OrderItems</th>
+                                    <th>Actions</th>
+                                </tr>
+                                <tbody>
+                                <tr class="account-order-list" th:each="order:${orderList}">
+                                    <td><b th:text="'#'+${order.orderNo}"></b></td>
+                                    <td th:text="${order.payTime}"></td>
+                                    <td th:text="${order.receiver}"></td>
+                                    <td th:text="'$'+${order.totalPay}"></td>
+                                    <td><span class="badge order-status" th:text="${order.state}" th:data-order-id="${order.id}"></span></td>
+                                    <td class="text-center">
+                                        <a href="" class="content-action">
+                                            <i class="far fa-arrow-right" th:data-order-id="${order.id}"></i>
+                                        </a>
+                                    </td>
+                                    <td><span class="badge order-status bg-primary" th:data-order-id="${order.id}">收货</span>
+                                        <span class="badge order-status bg-danger" th:data-order-id="${order.id}">退款</span></td>
+                                </tr>
+                                </tbody>
+
+                            </table>
+                        </div>
+                        <table class="table template-table" id="tr-template" style="display: none">
+                            <tr>
+                                <td>id</td>
+                                <td>productName</td>
+                                <td>count</td>
+                                <td>price</td>
+                                <td>productPic</td>
+                                <td>productSummary</td>
+                            </tr>
+                            <hr>
+                            <tbody class="template-body">
+
+                            </tbody>
+                        </table>
+                        <div class="col-12">
+
+                            <div class="pagination center mt-2">
+                                <ul class="pagination-list">
+                                    <li><a href="#"><i class="ti-arrow-left"></i></a></li>
+                                    <li><a href="#">1</a></li>
+                                    <li class="active"><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#"><i class="ti-arrow-right"></i></a></li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<footer th:replace="~{front/include::footer}"></footer>
+
+<div th:include="~{front/include::script}"></div>
+<script th:inline="javascript">
+    let orderList = /*[[${orderList}]]*/{};
+
+    $('.account-order-list>.text-center').click(function (e) {
+        e.preventDefault();
+        let $i = $(this).find(".far");
+        $i.toggleClass('fa-arrow-right fa-arrow-down');
+        if ($i[0].className === "far fa-arrow-down") {
+            //  复制模板
+            let $table = $("#tr-template").clone().removeAttr("id");
+            // 找到当前项目对应的订单id
+            let id = $i.data("order-id");
+            // 找到当前订单
+            let orderItems = null;
+            for (let order of orderList) {
+                if (order.id === id) {
+                    orderItems = order.orderItemList;
+                }
+            }
+            // 将当前订单项加到模板上
+            for (let item of orderItems) {
+                let $tr = $("<tr>");
+                let $td_id = $("<td>").text(item.id);
+                let $td_productName = $("<td>").text(item.productName);
+                let $td_count = $("<td>").text(item.count);
+                let $td_price = $("<td>").text(item.price);
+                let $td_productPic = $("<td>");
+                let $pic_img = $("<img>").attr("src",ctx+"/static/"+item.productPic).addClass("generate-pic");
+                $td_productPic.append($pic_img);
+                let $td_productSummary = $("<td>").text(item.productSummary);
+
+                $tr.append($td_id);
+                $tr.append($td_productName);
+                $tr.append($td_count);
+                $tr.append($td_price);
+                $tr.append($td_productPic);
+                $tr.append($td_productSummary);
+                $table.find(".template-body").append($tr);
+            }
+            $table.show();
+            $(this).parent().after($table);
+        } else {
+            $(this).parent().next("table").remove();
+        }
+    });
+</script>
+<script th:src="@{/static/front/js/orderlist.js}"></script>
+</body>
+</html>

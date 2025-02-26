@@ -1,0 +1,19 @@
+body {
+    margin: 8px;
+}
+
+#avatar-upload-btn {
+    width: 120px;
+}
+
+
+
+.layui-btn{
+    background-color: #7dd35c;
+}
+.layui-progress{
+!important;
+    width: 28%;
+    margin-top: 10px;
+    margin-left: 16px;
+}

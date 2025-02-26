@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.flyfishshop.dao.BrandDao">
+    <cache type="org.mybatis.caches.caffeine.CaffeineCache" flushInterval="720000"/>
+
+    <sql id="Columns">
+        select id, name, company, logo, site, description
+        from t_brand
+    </sql>
+
+    <select id="findBrandsToShow" resultType="Brand" useCache="true">
+        <include refid="Columns"></include>
+        <where>
+            <if test="id!=null">id=#{id}</if>
+            <if test="name!=null and name!=''">name=#{name}</if>
+        </where>
+    </select>
+    <select id="findAllBrands" resultType="Brand" useCache="true">
+        <include refid="Columns"></include>
+    </select>
+    <select id="findBrandById" resultType="Brand" useCache="true">
+        <include refid="Columns"></include>
+        <where>id=#{id}</where>
+    </select>
+    <delete id="deleteBrandByIds">
+        delete
+        from t_brand
+        where id in
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">#{id}</foreach>
+    </delete>
+    <update id="updateBrand">
+        update t_brand
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="logo != null and logo != ''">
+                logo = #{logo},
+            </if>
+            <if test="site != null and site != ''">
+                site = #{site},
+            </if>
+            <if test="description != null and description != ''">
+                description = #{description},
+            </if>
+            <if test="company != null and company != ''">
+                company = #{company},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <insert id="addBrand">
+        insert into t_brand(name, company, logo, site, description)
+        values (#{name}, #{company}, #{logo}, #{site}, #{description})
+    </insert>
+</mapper>

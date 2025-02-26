@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>新增用户</title>
+    <!--引入layui-->
+    <link rel="stylesheet" th:href="@{/static/lib/layui/css/layui.css}">
+    <script th:src="@{/static/lib/layui/layui.js}"></script>
+
+    <script th:inline="javascript">
+        let ctx = /*[[@{/}]]*/"";//上下文路径
+        if (ctx.endsWith("/")) {
+            ctx = ctx.substring(0, ctx.length - 1);
+        }
+        const error = /*[[${error}]]*/"";
+        const editUser = /*[[${user}]]*/{};
+    </script>
+    <!--自定义-->
+    <link rel="stylesheet" th:href="@{/static/admin/user/add.css}">
+    <script th:src="@{/static/admin/user/edit.js}"></script>
+</head>
+<body>
+<!--表单-->
+<form id="form" class="layui-form" lay-filter="form">
+    <div class="layui-form-item">
+        <label class="layui-form-label">账号:</label>
+        <div class="layui-input-block">
+            <input type="text" name="account" placeholder="请输入用户账号"
+                   autocomplete="off" class="layui-input" readonly>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">密码:</label>
+        <div class="layui-input-block">
+            <input type="password" name="password" placeholder="请输入用户密码,为空表示不修改"
+                   autocomplete="off" lay-verify="password" class="layui-input">
+        </div>
+    </div>
+
+    <!--文件上传-->
+    <div class="layui-form-item">
+        <label class="layui-form-label">头像:</label>
+        <div class="layui-input-block">
+            <button type="button" class="layui-btn" id="avatar-upload-btn">
+                <i class="layui-icon layui-icon-upload"></i> 图片上传
+            </button>
+            <div class="avatar-preview"></div>
+            <img class="layui-upload-img" id="avatar-upload-img" style="width: 132px; height: 122px;display: none">
+            <div class="layui-progress layui-progress-big" lay-showPercent="yes" lay-filter="filter-demo">
+                <div class="layui-progress-bar" lay-percent=""></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">姓名:</label>
+        <div class="layui-input-block">
+            <input type="text" name="name" placeholder="请输入用户姓名" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">性别:</label>
+        <div class="layui-input-block">
+            <input type="radio" name="sex" value="男" title="男" checked>
+            <input type="radio" name="sex" value="女" title="女">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">出生日期:</label>
+        <div class="layui-input-block">
+            <input type="text" name="birthday" placeholder="请选择出生日期" autocomplete="off"
+                   class="layui-input" readonly>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">电话:</label>
+        <div class="layui-input-block">
+            <input type="text" name="phone" placeholder="请输入用户手机号" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">邮箱:</label>
+        <div class="layui-input-block">
+            <input type="text" name="email" placeholder="请输入用户邮箱" autocomplete="off"
+                   class="layui-input" lay-verify="email">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">身份证号:</label>
+        <div class="layui-input-block">
+            <input type="text" name="cardId" placeholder="请输入用户身份证号" autocomplete="off"
+                   class="layui-input" lay-verify="required|cardId">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">简介:</label>
+        <div class="layui-input-block">
+            <textarea name="description" placeholder="请输入用户简介" class="layui-textarea"></textarea>
+        </div>
+    </div>
+
+</form>
+</body>
+</html>

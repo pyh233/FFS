@@ -1,0 +1,42 @@
+body {
+    margin: 8px;
+}
+
+#avatar-upload-btn {
+    width: 120px;
+}
+
+.pic-preview {
+    width: 132px;
+    height: 122px;
+    border: 1px solid #ccc;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+    margin-top: 4px;
+}
+
+.layui-btn {
+    background-color: #7dd35c;
+}
+
+.layui-progress {
+!important;
+    width: 132px;
+    margin-top: 10px;
+}
+
+#otherPic-upload-preview {
+    width: 500px;
+    height: 200px;
+}
+
+/* 多图片预览上的*/
+#otherPic-upload-preview img{
+    transition: 0.5s;
+}
+#otherPic-upload-preview img:hover {
+    filter: alpha(Opacity=50);
+    -moz-opacity: 0.5;
+    opacity: 0.5;
+}

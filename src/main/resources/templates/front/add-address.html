@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="~{front/include::link}">
+</head>
+<style>
+    .nice-select{
+        height: 45px !important;
+        border-radius: 10px !important;
+        padding: 0 10px !important;
+        color: #666;
+        border: 1px solid #ccc !important;
+        margin-bottom: 15px !important;
+    }
+</style>
+<body>
+
+<header th:replace="~{front/include::header}"></header>
+
+
+
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="bread-inner">
+                    <ul class="bread-list">
+                        <li><a href="index.html">Home<i class="ti-arrow-right"></i></a></li>
+                        <li class="active"><a href="#">Add Address</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="shop section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 mb-4">
+                <div class="account-sidebar">
+                    <h6 class="sidebar-title">DASHBOARD</h6>
+                    <div class="sidebar-list">
+                        <a href="/my/orders" class="active"><i class="far fa-shopping-bag"></i> Orders
+                            <span>10</span></a>
+                        <a href="wishlist.html"><i class="far fa-heart"></i> Wishlist <span>20</span></a>
+                        <a href="support-ticket.html"><i class="far fa-headset"></i> Support Tickets <span>2</span></a>
+                    </div>
+                    <h6 class="sidebar-title mt-4">PROFILE SETTINGS</h6>
+                    <div class="sidebar-list">
+                        <a href="/my/profile"><i class="far fa-user"></i> Profile Info</a>
+                        <a href="/my/address"><i class="far fa-map-marker-alt"></i> Addresses <span>20</span></a>
+                        <a href="payment-method.html"><i class="far fa-credit-card"></i> Payment Methods <span>2</span></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="account-content bg-white pt-0">
+                    <h4 class="account-content-title"><i class="far fa-map-marker-alt"></i> Add Address</h4>
+                    <div class="edit-profile">
+                        <form action="#">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label for="name" class="form-label">Receiver Name</label>
+                                        <input type="text" class="form-control" id="name" name="receiver">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label for="phone" class="form-label">Phone</label>
+                                        <input type="text" class="form-control" id="phone" name="phone">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label>State / Divition / Province<span>*</span></label>
+                                        <select name="province" placeholder="请选择省份">
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label>city<span>*</span></label>
+                                        <select name="city"  placeholder="请选择市">
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label>area<span>*</span></label>
+                                        <select name="area"  placeholder="请选择区域">
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label>street<span>*</span></label>
+                                        <select name="street"  placeholder="请选择街道">
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label for="address" class="form-label">Address Detail</label>
+                                        <input type="text" class="form-control" id="address" name="detail">
+                                    </div>
+                                </div>
+                            </div>
+                                <button class="btn">Save Changes</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<footer th:replace="~{front/include::footer}"></footer>
+<div th:include="~{front/include::script}"></div>
+<script th:src="@{/static/front/js/add-address.js}"></script>
+</body>
+</html>

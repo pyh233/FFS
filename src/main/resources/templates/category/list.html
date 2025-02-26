@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!--导入layui-->
+    <link rel="stylesheet" th:href="@{/static/lib/layui/css/layui.css}">
+    <script th:src="@{/static/lib/layui/layui.js}"></script>
+    <!--导入自己的静态资源-->
+    <link rel="stylesheet" th:href="@{/static/admin/category/list.css}">
+    <script th:src="@{/static/admin/category/list.js}"></script>
+    <script th:inline="javascript">
+        let ctx = /*[[@{/}]]*/"";
+        if (ctx.endsWith("/")) {
+            ctx = ctx.substring(0, ctx.length - 1);
+        }
+    </script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="data-grid">
+    <table id="category-table" lay-filter="category-table"></table>
+</div>
+</body>
+<!--表格工具栏-->
+<script type="text/html" id="toolbar">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="add">
+            <i class="layui-icon layui-icon-add-circle"></i>新增</button>
+
+        <button class="layui-btn layui-btn-sm" lay-event="edit">
+            <i class="layui-icon layui-icon-edit"></i>修改</button>
+
+        <button class="layui-btn layui-btn-sm layui-bg-red" lay-event="del">
+            <i class="layui-icon layui-icon-delete"></i>删除</button>
+    </div>
+</script>
+<script type="text/html" id="tool">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="edit" name="toolBtn">修改</button>
+        <button class="layui-btn layui-btn-sm layui-bg-red" lay-event="del" name="toolBtn">删除</button>
+    </div>
+</script>
+</html>

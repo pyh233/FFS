@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!--layui-->
+    <link rel="stylesheet" th:href="@{/static/lib/layui/css/layui.css}">
+    <script th:src="@{/static/lib/layui/layui.js}"></script>
+    <meta charset="UTF-8">
+    <title>申请信息</title>
+    <!--导入自己的css和js-->
+    <link rel="stylesheet" th:href="@{/static/front/css/edit-refund.css}">
+    <script th:src="@{/static/front/js/edit-refund.js}"></script>
+    <script th:inline="javascript">
+        let ctx = /*[[@{/}]]*/"";
+        if (ctx.endsWith("/")) {
+            ctx = ctx.substring(0, ctx.length - 1);
+        }
+        let refundOrder = /*[[${refundOrder}]]*/{};
+    </script>
+</head>
+<body>
+<form class="layui-form" id="add-form" lay-filter="add-form">
+    <div class="layui-form-item">
+        <label class="layui-form-label">申请原因:</label>
+        <div class="layui-input-block">
+            <textarea style="height:500px" name="refundCause" autocomplete="off"
+                      class="layui-input"></textarea>
+        </div>
+    </div>
+</form>
+</body>
+</html>

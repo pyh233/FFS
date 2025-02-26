@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!--layui-->
+    <link rel="stylesheet" th:href="@{/static/lib/layui/css/layui.css}">
+    <script th:src="@{/static/lib/layui/layui.js}"></script>
+    <meta charset="UTF-8">
+    <title>添加</title>
+    <!--导入自己的css和js-->
+    <link rel="stylesheet" th:href="@{/static/admin/brand/add.css}">
+    <script th:src="@{/static/admin/brand/edit.js}"></script>
+    <script th:inline="javascript">
+        let ctx = /*[[@{/}]]*/"";
+        if (ctx.endsWith("/")) {
+            ctx = ctx.substring(0, ctx.length - 1);
+        }
+        let editBrand=/*[[${brand}]]*/{};
+    </script>
+</head>
+<body>
+<form class="layui-form" id="edit-form" lay-filter="edit-form">
+    <div class="layui-form-item">
+        <label class="layui-form-label">品牌名称:</label>
+        <div class="layui-input-block">
+            <input type="text" name="name" lay-verify="required" placeholder="请输入品牌名称" autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">所属公司:</label>
+        <div class="layui-input-block">
+            <input type="text" name="company" placeholder="请输入公司" autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+
+    <!--文件上传-->
+    <div class="layui-form-item">
+        <label class="layui-form-label">logo:</label>
+        <div class="layui-input-block">
+            <button type="button" class="layui-btn" id="avatar-upload-btn">
+                <i class="layui-icon layui-icon-upload"></i> 图片上传
+            </button>
+            <img class="layui-upload-img" id="logo-upload-img" style="width: 132px; height: 122px;display: none">
+            <div class="logo-preview"></div>
+            <div class="layui-progress layui-progress-big" lay-showPercent="yes" lay-filter="filter-demo">
+                <div class="layui-progress-bar" lay-percent=""></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">品牌网址:</label>
+        <div class="layui-input-block">
+            <input type="text" name="site" placeholder="请输入网址" autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">品牌简介:</label>
+        <div class="layui-input-block">
+            <textarea type="text" name="description" autocomplete="off" class="layui-input"></textarea>
+        </div>
+    </div>
+</form>
+</body>
+</html>
