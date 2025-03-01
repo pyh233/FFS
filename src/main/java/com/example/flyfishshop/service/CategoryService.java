@@ -11,5 +11,5 @@ public interface CategoryService {
     Category findNodeById(Integer id);
     int deleteCategoryByIds(Integer[] ids);
     boolean addCategory(Category category);
-    boolean updateCategory(Category category);
+    boolean updateCategory(Category updateCategory);
 }

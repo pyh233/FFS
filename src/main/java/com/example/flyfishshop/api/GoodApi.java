@@ -3,19 +3,16 @@ package com.example.flyfishshop.api;
 import com.example.flyfishshop.model.Good;
 import com.example.flyfishshop.service.CategoryService;
 import com.example.flyfishshop.service.GoodService;
-import com.example.flyfishshop.util.CommonAddGroup;
-import com.example.flyfishshop.util.CommonEditGroup;
+import com.example.flyfishshop.util.validate.CommonAddGroup;
+import com.example.flyfishshop.util.validate.CommonEditGroup;
 import com.example.flyfishshop.util.JsonResult;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
-import org.apache.ibatis.annotations.Param;
-import org.apache.tomcat.Jar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 

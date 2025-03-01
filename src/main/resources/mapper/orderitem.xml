@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.flyfishshop.dao.OrderItemDao">
+    <!--保存订单项-->
+    <insert id="saveOrderItem" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into t_order_item(order_id, good_id, deal_price, count, product_name, product_pic, product_summary)
+        values (#{orderId}, #{goodId}, #{price}, #{count}, #{productName}, #{productPic}, #{productSummary})
+    </insert>
+    <!--根据订单id获取订单项-->
+    <select id="getOrderItemsByOrderId" resultType="ItemInOrder">
+        select id,
+               order_id,
+               good_id,
+               count,
+               product_name,
+               product_pic,
+               product_summary,
+               deal_price as price
+        from t_order_item
+        where order_id = #{orderId}
+    </select>
+</mapper>

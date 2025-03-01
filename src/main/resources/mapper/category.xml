@@ -45,7 +45,6 @@
         delete from t_category where id in
         <foreach collection="ids" open="(" close=")" separator="," item="id">#{id}</foreach>
     </delete>
-
     <!--添加-->
     <insert id="insert" keyProperty="id" keyColumn="id" useGeneratedKeys="true" flushCache="true">
         insert into t_category(name, alias, icon_cls, seq, parent_id, description)

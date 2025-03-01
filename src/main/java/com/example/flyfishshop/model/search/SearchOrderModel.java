@@ -12,4 +12,5 @@ import lombok.ToString;
 @JsonIgnoreProperties("handler")
 public class SearchOrderModel extends Order {
     private String account;
+    private String createdDateRange;
 }

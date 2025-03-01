@@ -26,7 +26,7 @@ public class BrandServiceImpl implements BrandService {
     @Cacheable(keyGenerator = "myKeyGenerator")
     public List<Brand> getAllBrands(Brand brand,Page<?> page) {
         try (Page<?> __ = PageHelper.startPage(page.getPageNum(), page.getPageSize())) {
-            return brandDao.findBrandsToShow(brand);
+            return brandDao.findAllBrands(brand);
         }
     }
 
@@ -40,7 +40,7 @@ public class BrandServiceImpl implements BrandService {
     @Override
     @Cacheable(keyGenerator = "myKeyGenerator")
     public List<Brand> getAllBrands() {
-        return brandDao.findAllBrands();
+        return brandDao.findAllBrands(new Brand());
     }
 
     @Override

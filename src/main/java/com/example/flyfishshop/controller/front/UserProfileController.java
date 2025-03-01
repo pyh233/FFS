@@ -8,7 +8,7 @@ import com.example.flyfishshop.model.UserAddress;
 import com.example.flyfishshop.service.OrderService;
 import com.example.flyfishshop.service.UserAddressService;
 import com.example.flyfishshop.service.UserService;
-import com.example.flyfishshop.util.CommonAddGroup;
+import com.example.flyfishshop.util.validate.CommonAddGroup;
 import com.example.flyfishshop.util.JsonResult;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,20 +68,19 @@ public class UserProfileController {
     @ResponseBody
     public ResponseEntity<JsonResult> updateMyProfile(User user, HttpSession session) {
         User currentUser = (User) session.getAttribute(UserLoginInterceptor.USER_LOGIN_IDENTIFY);
-        user.setId(currentUser.getId());
-        user.setName(currentUser.getName());
-        boolean success = userService.userUpdate(user);
+        if (StringUtils.hasText(user.getAvatar())) {
+            currentUser.setAvatar(user.getAvatar());
+        }
+        if (StringUtils.hasText(user.getName())) {
+            currentUser.setName(user.getName());
+        }
+        if (StringUtils.hasText(user.getSex())) {
+            currentUser.setSex(user.getSex());
+        }
+        // 更新当前用户
+        session.setAttribute(UserLoginInterceptor.USER_LOGIN_IDENTIFY, currentUser);
+        boolean success = userService.userUpdate(currentUser);
         if (success) {
-            if(StringUtils.hasText(user.getAvatar())){
-                currentUser.setAvatar(user.getAvatar());
-            }
-            if(StringUtils.hasText(user.getName())){
-                currentUser.setName(user.getName());
-            }
-            if(StringUtils.hasText(user.getSex())){
-                currentUser.setSex(user.getSex());
-            }
-            session.setAttribute(UserLoginInterceptor.USER_LOGIN_IDENTIFY, currentUser);
             return ResponseEntity.ok(JsonResult.success("修改成功,即将跳转", null));
         } else {
             return ResponseEntity.ok(JsonResult.fail("修改失败"));
@@ -141,6 +140,7 @@ public class UserProfileController {
         model.addAttribute("orderList", orderList);
         return "front/order-list";
     }
+
     // 收货请求
     @PatchMapping("/order/finish")
     @ResponseBody

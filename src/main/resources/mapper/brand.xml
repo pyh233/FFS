@@ -10,19 +10,15 @@
         from t_brand
     </sql>
 
-    <select id="findBrandsToShow" resultType="Brand" useCache="true">
-        <include refid="Columns"></include>
-        <where>
-            <if test="id!=null">id=#{id}</if>
-            <if test="name!=null and name!=''">name=#{name}</if>
-        </where>
-    </select>
     <select id="findAllBrands" resultType="Brand" useCache="true">
         <include refid="Columns"></include>
-    </select>
-    <select id="findBrandById" resultType="Brand" useCache="true">
-        <include refid="Columns"></include>
-        <where>id=#{id}</where>
+        <where>
+            <if test="id!=null">and id=#{id}</if>
+            <if test="name!=null and name!=''">
+                <bind value="'%'+name+'%'" name="nameLike"/>
+                and name like #{nameLike}
+            </if>
+        </where>
     </select>
     <delete id="deleteBrandByIds">
         delete
@@ -51,9 +47,13 @@
         </set>
         where id = #{id}
     </update>
-
     <insert id="addBrand">
         insert into t_brand(name, company, logo, site, description)
         values (#{name}, #{company}, #{logo}, #{site}, #{description})
     </insert>
+
+    <select id="findBrandById" resultType="Brand" useCache="true">
+        <include refid="Columns"></include>
+        <where>id=#{id}</where>
+    </select>
 </mapper>

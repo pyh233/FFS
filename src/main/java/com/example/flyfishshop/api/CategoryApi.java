@@ -2,10 +2,11 @@ package com.example.flyfishshop.api;
 
 import com.example.flyfishshop.model.Category;
 import com.example.flyfishshop.service.CategoryService;
-import com.example.flyfishshop.util.CommonAddGroup;
-import com.example.flyfishshop.util.CommonEditGroup;
+import com.example.flyfishshop.util.validate.CommonAddGroup;
+import com.example.flyfishshop.util.validate.CommonEditGroup;
 import com.example.flyfishshop.util.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/admin/api/v1/category")
+@RequestMapping(value = "/admin/api/v1/category",produces = MediaType.APPLICATION_JSON_VALUE)
 public class CategoryApi {
     private CategoryService categoryService;
 

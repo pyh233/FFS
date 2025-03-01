@@ -31,34 +31,6 @@
         insert into t_order(order_no, member_id, state, created_time)
         values (#{orderNo}, #{memberId}, #{state}, #{createdTime})
     </insert>
-    <!--保存订单项-->
-    <insert id="saveOrderItem" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
-        insert into t_order_item(order_id, good_id, deal_price, count, product_name, product_pic, product_summary)
-        values (#{orderId}, #{goodId}, #{price}, #{count}, #{productName}, #{productPic}, #{productSummary})
-    </insert>
-    <!--根据id获取订单-->
-    <select id="getOrderById" resultType="Order">
-        <include refid="Columns"></include>
-        <where>id=#{id}</where>
-    </select>
-    <!--根据订单编号获取订单-->
-    <select id="getOrderByOrderNo" resultType="Order">
-        <include refid="Columns"></include>
-        <where>order_no=#{orderNo}</where>
-    </select>
-    <!--根据订单id获取订单项-->
-    <select id="getOrderItemsByOrderId" resultType="ItemInOrder">
-        select id,
-               order_id,
-               good_id,
-               count,
-               product_name,
-               product_pic,
-               product_summary,
-               deal_price as price
-        from t_order_item
-        where order_id = #{orderId}
-    </select>
     <!--完善订单信息-->
     <update id="patchOrder">
         update t_order
@@ -96,12 +68,6 @@
         </set>
         where id=#{id}
     </update>
-    <!--获取用户所有订单-->
-    <select id="getAllOrdersByUserId" resultType="Order">
-        <include refid="Columns"></include>
-        where member_id=#{userId}
-    </select>
-
     <!--收货-->
     <update id="finishOrder">
         update t_order
@@ -116,11 +82,27 @@
             refund_cause=#{refundCause}
         where id = #{id}
     </update>
+
+    <!--获取用户所有订单-->
+    <select id="getAllOrdersByUserId" resultType="Order">
+        <include refid="Columns"></include>
+        where member_id=#{userId}
+    </select>
     <!--查询用户最新的一笔未支付订单-->
     <select id="getUserLatestOrderNotPay" resultType="Order">
         <include refid="Columns"></include>
         <where>member_id=#{userId} and state="NOT_PAY"</where>
         order by created_time desc limit 1
+    </select>
+    <!--根据id获取订单-->
+    <select id="getOrderById" resultType="Order">
+        <include refid="Columns"></include>
+        <where>id=#{id}</where>
+    </select>
+    <!--根据订单编号获取订单-->
+    <select id="getOrderByOrderNo" resultType="Order">
+        <include refid="Columns"></include>
+        <where>order_no=#{orderNo}</where>
     </select>
 
     <!--=========================================================================================-->

@@ -9,6 +9,7 @@ import com.example.flyfishshop.util.JsonResult;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/front/api/v1")
+@RequestMapping(value = "/front/api/v1",produces = MediaType.APPLICATION_JSON_VALUE)
 public class FrontApi {
     private CategoryService categoryService;
     private GoodService goodService;

@@ -1,22 +1,17 @@
 package com.example.flyfishshop.controller.front;
 
-import com.alibaba.fastjson.JSONObject;
-import com.alipay.api.AlipayApiException;
-import com.alipay.api.AlipayClient;
-import com.alipay.api.internal.util.AlipaySignature;
-import com.alipay.api.request.AlipayTradePagePayRequest;
-import com.alipay.api.response.AlipayTradePagePayResponse;
 import com.example.flyfishshop.config.UserLoginInterceptor;
 import com.example.flyfishshop.model.*;
 import com.example.flyfishshop.model.search.FrontGoodSearchModel;
 import com.example.flyfishshop.service.*;
 import com.example.flyfishshop.util.*;
+import com.example.flyfishshop.util.validate.CommonLoginGroup;
+import com.example.flyfishshop.util.validate.CommonRegisterGroup;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -25,10 +20,8 @@ import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 public class FrontController {
@@ -73,8 +66,6 @@ public class FrontController {
     @PostMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<JsonResult> login(@Validated({CommonLoginGroup.class}) User user, HttpSession session) {
-        //  TODO:验证码验证
-
         User userInDB = userService.Login(user);
         if (userInDB != null) {
             session.setAttribute(UserLoginInterceptor.USER_LOGIN_IDENTIFY, userInDB);

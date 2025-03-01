@@ -8,9 +8,9 @@ $(()=>{
         let password = $form.find("[name=password]").val();
         let passwordAgain = $form.find("[name=passwordAgain]").val();
 
-        if(password === passwordAgain){
-            let url = ctx + "/admin/admin/register";
-            //  TODO:需要检查账户和密码是否合法
+        if(password && password === passwordAgain){
+            let url = ctx + "/admin/register";
+
             console.log("login");
             // login(account,password,url);
         }

@@ -1,9 +1,7 @@
 package com.example.flyfishshop.model;
 
-import com.example.flyfishshop.util.CommonAddGroup;
-import com.example.flyfishshop.util.CommonEditGroup;
-import com.example.flyfishshop.util.CommonLoginGroup;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.example.flyfishshop.util.validate.CommonAddGroup;
+import com.example.flyfishshop.util.validate.CommonLoginGroup;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;

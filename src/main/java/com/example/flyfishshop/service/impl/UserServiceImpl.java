@@ -119,11 +119,8 @@ public class UserServiceImpl implements UserService {
     @Override
     @CacheEvict(allEntries = true)
     public boolean userUpdate(User user) {
-        user.setUpdatedBy(user.getAccount());
+        user.setUpdatedBy(user.getName());
         user.setUpdatedTime(LocalDateTime.now());
-
         return userDao.update(user) > 0;
     }
-
-
 }

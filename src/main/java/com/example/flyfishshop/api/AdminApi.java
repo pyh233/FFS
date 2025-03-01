@@ -2,8 +2,8 @@ package com.example.flyfishshop.api;
 
 import com.example.flyfishshop.model.Admin;
 import com.example.flyfishshop.service.AdminService;
-import com.example.flyfishshop.util.CommonAddGroup;
-import com.example.flyfishshop.util.CommonEditGroup;
+import com.example.flyfishshop.util.validate.CommonAddGroup;
+import com.example.flyfishshop.util.validate.CommonEditGroup;
 import com.example.flyfishshop.util.JsonResult;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
@@ -13,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -57,7 +56,7 @@ public class AdminApi {
         if(success){
             return ResponseEntity.ok(JsonResult.success("成功添加一条信息",null));
         }else {
-            return ResponseEntity.ok(JsonResult.fail("添加失败"));
+            return ResponseEntity.ok(JsonResult.fail("添加失败,用户名已存在"));
         }
     }
     @PutMapping

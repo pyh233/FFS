@@ -91,14 +91,9 @@ public class AlipayController {
         if (signVerified) {
             String orderNo = params.get("out_trade_no");//获取订单号
             Order order = orderService.getOrderByOrderNo(orderNo);//获取订单
-            // TODO:?
-            Order od = new Order();
-            od.setId(order.getId());
-
-            od.setState(OrderState.PAYED);//修改为已支付
-            od.setPayTime(LocalDateTime.now());
-
-            orderService.patchPay(od);//只修改订单状态
+            order.setState(OrderState.PAYED);// 修改订单状态等等
+            order.setPayTime(LocalDateTime.now());
+            orderService.patchPay(order);//只修改订单状态和支付时间
 
             //System.out.println(JSONObject.toJSONString(params));
 

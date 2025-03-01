@@ -15,7 +15,7 @@ public class AddressApi {
     AddressService addressService;
 
     @Autowired
-    public void setaddressService(AddressService addressService) {
+    public void setAddressService(AddressService addressService) {
         this.addressService = addressService;
     }
 

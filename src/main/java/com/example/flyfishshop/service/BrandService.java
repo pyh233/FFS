@@ -7,9 +7,10 @@ import java.util.List;
 
 public interface BrandService {
     public List<Brand> getAllBrands(Brand brand,Page<?> page);
-    public Brand getBrandById(Integer id);
-    public List<Brand> getAllBrands();
     public boolean saveBrand(Brand brand);
     public boolean updateBrand(Brand brand);
     public int deleteBrandByIds(Integer[] ids);
+    
+    public Brand getBrandById(Integer id);
+    public List<Brand> getAllBrands();
 }

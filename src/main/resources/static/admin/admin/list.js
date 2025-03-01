@@ -73,7 +73,7 @@ $(() => {
                             layer.close(index);
                             reload();
                         } else {
-                            layer.msg("新增管理员操作失败!");
+                            layer.msg("新增管理员操作失败,用户名已存在!");
                         }
                     })
                 }

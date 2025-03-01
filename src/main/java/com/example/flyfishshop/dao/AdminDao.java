@@ -11,7 +11,7 @@ public interface AdminDao {
     public int delete(Integer[] ids);
     public int insert(Admin admin);
     public int update(Admin admin);
-    public Admin findById(Integer id);
 
-    public Admin login(Admin admin);
+    public Admin findById(Integer id);
+    public Admin findByAccount(String account);
 }

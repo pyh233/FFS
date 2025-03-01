@@ -22,7 +22,7 @@ public class FrontHeadBarMsgInterceptor implements HandlerInterceptor {
         User user = (User) session.getAttribute(UserLoginInterceptor.USER_LOGIN_IDENTIFY);
         // 拦截器获取会话中的用户信息
         if (user != null) {
-            //NOTE:为什么要存储而无法直接从session中取出用户呢?
+            //WHY:为什么要存储而无法直接从session中取出用户呢?
             request.setAttribute("user", user);
             // 查询出当前用户最新的一笔未支付的订单
             Order notPayedOrder = orderService.getNotPayedOrder(user.getId());

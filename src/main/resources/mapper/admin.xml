@@ -40,10 +40,6 @@
         values (#{account}, #{password}, #{avatarUrl}, #{lastLoginTime}, #{lastLoginIp}, #{description}, #{createTime},
                 #{createdBy}, #{lastModifyTime}, #{lastModifiedBy})
     </insert>
-    <select id="findById" resultType="Admin">
-        <include refid="Columns"></include>
-        <where>id=#{id}</where>
-    </select>
     <update id="update">
         update t_admin_user
         <set>
@@ -72,10 +68,12 @@
         <where>id=#{id}</where>
     </update>
 
-    <select id="login" resultType="Admin">
+    <select id="findById" resultType="Admin">
         <include refid="Columns"></include>
-        <where>
-            account=#{account}
-        </where>
+        <where>id=#{id}</where>
+    </select>
+    <select id="findByAccount" resultType="Admin">
+        <include refid="Columns"></include>
+        <where>account=#{account}</where>
     </select>
 </mapper>

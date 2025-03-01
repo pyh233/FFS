@@ -10,25 +10,21 @@ import java.util.List;
 
 @Mapper
 public interface OrderDao {
-    // 订单
+    // 创建订单，添加收货人信息，添加支付信息，添加收货信息，添加退款信息
     int createOrder(Order order);
-    Order getOrderById(Integer id);
-    Order getOrderByOrderNo(String orderNo);
     int patchOrder(Order order);
     int patchPay(Order order);
+    int finishOrder(Order order);
+    int refundOrder(Order order);
+    // 获取用户所有订单，最近未支付订单
     List<Order> getAllOrdersByUserId(Integer userId);
     Order getUserLatestOrderNotPay(Integer userId);
-    // 订单项
-    // 保存订单项
-    int saveOrderItem(ItemInOrder itemInOrder);
-    // 根据订单id获取订单项
-    List<ItemInOrder> getOrderItemsByOrderId(Integer orderId);
-    // 收货
-    int finishOrder(Order order);
-    // 申请退款
-    int refundOrder(Order order);
+    Order getOrderById(Integer id);
+    Order getOrderByOrderNo(String orderNo);
+
     // =============================================================
     List<Order> getOrderList(SearchOrderModel som);
+    // 发货
     int putOrder(Order order);
     // 接受退款
     int agreeRefund(Order order);

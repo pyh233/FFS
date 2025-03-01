@@ -3,7 +3,7 @@ package com.example.flyfishshop.controller;
 import com.example.flyfishshop.config.AdminUserInterceptor;
 import com.example.flyfishshop.model.Admin;
 import com.example.flyfishshop.service.AdminService;
-import com.example.flyfishshop.util.CommonAddGroup;
+import com.example.flyfishshop.util.validate.CommonAddGroup;
 import com.example.flyfishshop.util.JsonResult;
 import com.wf.captcha.SpecCaptcha;
 import jakarta.servlet.http.HttpServletRequest;
@@ -56,7 +56,6 @@ public class IndexController {
     @PostMapping(value = "/login",produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<JsonResult> login(Admin admin,String captcha, HttpSession session) {
-        // TODO: 验证码校验
         if(!captcha.equals(session.getAttribute("captcha"))) {
             return ResponseEntity.ok(JsonResult.fail("验证码不正确"));
         }

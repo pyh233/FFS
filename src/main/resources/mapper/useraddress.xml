@@ -10,7 +10,9 @@
 
 
     <select id="findUserAddressByUid" resultMap="userAddressMap">
-        select id,member_id,street_id,detail,phone,receiver,is_default from t_member_address where member_id=#{id}
+        select id, member_id, street_id, detail, phone, receiver, is_default
+        from t_member_address
+        where member_id = #{id}
     </select>
     <delete id="deleteUserAddressByIds">
         delete from t_member_address where id in

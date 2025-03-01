@@ -59,7 +59,8 @@ $(()=>{
       e.preventDefault();
       let ids = [];
       for(let items of $(".deleteFormMyCart")){
-         if($(items).data("item-id") ===undefined){
+         // NOTE:思考是不是不需要判断item的id不存在?
+         if($(items).data("item-id") === undefined){
             break;
          }
          ids.push($(items).data("item-id"));

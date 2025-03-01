@@ -1,9 +1,6 @@
 package com.example.flyfishshop.service.impl;
 
-import com.example.flyfishshop.dao.CartItemDao;
-import com.example.flyfishshop.dao.GoodDao;
-import com.example.flyfishshop.dao.OrderDao;
-import com.example.flyfishshop.dao.UserDao;
+import com.example.flyfishshop.dao.*;
 import com.example.flyfishshop.model.*;
 import com.example.flyfishshop.model.search.SearchOrderModel;
 import com.example.flyfishshop.service.OrderService;
@@ -30,6 +27,12 @@ public class OrderServiceImpl implements OrderService {
     private OrderDao orderDao;
     private CartItemDao cartItemDao;
     private GoodDao goodDao;
+    private OrderItemDao orderItemDao;
+
+    @Autowired
+    public void setOrderItemDao(OrderItemDao orderItemDao) {
+        this.orderItemDao = orderItemDao;
+    }
 
     @Autowired
     public void setOrderDao(OrderDao orderDao) {
@@ -88,9 +91,9 @@ public class OrderServiceImpl implements OrderService {
             itemInOrder.setProductPic(good.getPic());
             itemInOrder.setProductSummary(good.getSummary());
             // 订单项借用订单的dao
-            this.orderDao.saveOrderItem(itemInOrder);
+            orderItemDao.saveOrderItem(itemInOrder);
             // 删除购物车项
-            this.cartItemDao.deleteCartItem(itemInCart);
+            cartItemDao.deleteCartItem(itemInCart);
         }
         return true;
     }
@@ -104,11 +107,11 @@ public class OrderServiceImpl implements OrderService {
         if (id == null || order == null) {
             return null;
         }
-        order.setOrderItemList(orderDao.getOrderItemsByOrderId(order.getId()));
+        order.setOrderItemList(orderItemDao.getOrderItemsByOrderId(order.getId()));
         return order;
     }
 
-    // 获取订单
+    // 根据订单编号查询订单
     @Override
     @Cacheable(keyGenerator = "myKeyGenerator")
     public Order getOrderByOrderNo(String orderNo) {
@@ -121,7 +124,6 @@ public class OrderServiceImpl implements OrderService {
 
     // 获取最近一笔未支付订单
     @Override
-    @Cacheable(keyGenerator = "myKeyGenerator")
     public Order getNotPayedOrder(Integer userId) {
         return orderDao.getUserLatestOrderNotPay(userId);
     }
@@ -146,7 +148,7 @@ public class OrderServiceImpl implements OrderService {
     public List<Order> getAllOrdersByUid(Integer uid) {
         List<Order> orderList = orderDao.getAllOrdersByUserId(uid);
         for (int i = 0; i < orderList.size(); i++) {
-            orderList.get(i).setOrderItemList(orderDao.getOrderItemsByOrderId(orderList.get(i).getId()));
+            orderList.get(i).setOrderItemList(orderItemDao.getOrderItemsByOrderId(orderList.get(i).getId()));
         }
         return orderList;
     }
@@ -171,7 +173,6 @@ public class OrderServiceImpl implements OrderService {
 
     // 获取订单列表
     @Override
-    @Cacheable(keyGenerator = "myKeyGenerator")
     public List<Order> getAllOrders(SearchOrderModel searchOrderModel, Page<?> page) {
         try (Page<?> __ = PageHelper.startPage(page.getPageNum(), page.getPageSize())) {
             return orderDao.getOrderList(searchOrderModel);

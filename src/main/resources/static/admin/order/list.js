@@ -85,7 +85,7 @@ layui.use(['table', 'form', 'jquery'], function () {
     });
 
     // 重载函数
-    function reload(page = 1) {
+    function reload() {
         let formData = form.val("search-form");
         table.reload("orderTable", {
             where: formData

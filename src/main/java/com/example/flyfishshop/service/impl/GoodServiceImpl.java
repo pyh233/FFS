@@ -41,7 +41,6 @@ public class GoodServiceImpl implements GoodService {
     }
 
     @Override
-    @Cacheable(keyGenerator = "myKeyGenerator")
     public List<Good> getAllGoods(Good searchGood, Page<?> page) {
         try (Page<?> __ = PageHelper.startPage(page.getPageNum(), page.getPageSize())) {
             Integer[] ids = null;

@@ -13,8 +13,8 @@ public interface UserDao {
     public int deleteByIds(Integer[] ids);
     public int insert(User user);
     public int update(User user);
-    public User findById(Integer id);
 
+    public User findById(Integer id);
     // 前端登录以及修改密码
     public User getUserByAccountForLogin(String name);
 }

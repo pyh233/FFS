@@ -49,24 +49,16 @@
             </if>
         </where>
     </select>
-    <!-- 批量删除 -->
     <delete id="deleteByIds">
         delete from t_member where id in
         <foreach collection="ids" open="(" close=")" item="id" separator=",">#{id}</foreach>
     </delete>
-    <!--插入一条数据-->
     <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
         insert into t_member(account, password, name, sex, birthday, phone, email, card_id, description, avatar,
                              created_time, created_by, last_modified_time, last_modified_by)
         values (#{account}, #{password}, #{name}, #{sex}, #{birthday}, #{phone}, #{email}, #{cardId}, #{description},
                 #{avatar}, #{createdTime}, #{createdBy}, #{updatedTime}, #{updatedBy})
     </insert>
-    <select id="findById" resultType="User">
-        <include refid="Columns"/>
-        <where>
-            id = #{id}
-        </where>
-    </select>
     <update id="update">
         update t_member
         <set>
@@ -107,7 +99,12 @@
         where id =#{id}
     </update>
 
-
+    <select id="findById" resultType="User">
+        <include refid="Columns"/>
+        <where>
+            id = #{id}
+        </where>
+    </select>
     <select id="getUserByAccountForLogin" resultType="User">
         <include refid="Columns"></include>
         <where>account=#{account}</where>

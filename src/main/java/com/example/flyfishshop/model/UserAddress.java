@@ -1,7 +1,7 @@
 package com.example.flyfishshop.model;
 
-import com.example.flyfishshop.util.CommonAddGroup;
-import com.example.flyfishshop.util.CommonEditGroup;
+import com.example.flyfishshop.util.validate.CommonAddGroup;
+import com.example.flyfishshop.util.validate.CommonEditGroup;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;

@@ -43,7 +43,10 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public boolean insert(Admin admin) {
-        // TODO:查询是否用户名重复
+        Admin adminInDB = adminDao.findByAccount(admin.getAccount());
+        if(adminInDB != null){
+            return false;
+        }
         admin.setPassword(pe.encryptPassword(admin.getPassword()));
         admin.setCreatedBy("admin");
         admin.setCreateTime(LocalDateTime.now());
@@ -67,7 +70,7 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public Admin login(Admin admin) {
-        Admin adminInDB = adminDao.login(admin);
+        Admin adminInDB = adminDao.findByAccount(admin.getAccount());
         if(adminInDB == null){
             return null;
         }

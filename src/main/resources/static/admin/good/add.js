@@ -130,12 +130,6 @@ $(() => {
         },
         exts: "jpg|png|gif|bmp|jpeg|svg",
         size: 1024,
-        // before: function (obj) {
-        //     // 预读本地文件示例，不支持ie8
-        //     obj.preview(function (index, file, result) {
-        //         $('#otherPic-upload-preview').append('<img src="' + result + '" alt="' + file.name + '" style="width: 90px; height: 90px;">')
-        //     });
-        // },
         done: function (resp) {
             // 上传成功后
             if (resp.success) {

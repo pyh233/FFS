@@ -1,10 +1,8 @@
 package com.example.flyfishshop.model;
 
-import com.example.flyfishshop.util.CommonEditGroup;
-import com.example.flyfishshop.util.OrderDataPatch;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.example.flyfishshop.util.validate.CommonEditGroup;
+import com.example.flyfishshop.util.validate.OrderDataPatch;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;

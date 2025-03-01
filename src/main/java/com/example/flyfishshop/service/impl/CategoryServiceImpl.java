@@ -88,16 +88,16 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     @CacheEvict(allEntries = true)
-    public boolean updateCategory(Category category) {
-        // NOTE:从前台传来的树没有子节点无法进行合法性判断
-        Integer editParentId = category.getParentId();
-        category = categoryDao.findTreeById(category.getId());
-        category.setParentId(editParentId);
-        if(CategoryHelper.updateCategoryParent(category,category.getParentId())) {
+    public boolean updateCategory(Category updateCategory) {
+        // NOTE:从前台传来的种类没有子节点无法进行合法性判断
+        // NOTE:需要判断修改后的父类id是否是自身以及子类，则需要以自身为树查询
+        Category categoryWithChildren = categoryDao.findTreeById(updateCategory.getId());
+        categoryWithChildren.setParentId(updateCategory.getParentId());
+        if(CategoryHelper.updateCategoryParent(categoryWithChildren,updateCategory.getParentId())) {
             // 如果发现种类改变有问题，直接返回false
             return false;
         }
-        return categoryDao.update(category) > 0;
+        return categoryDao.update(updateCategory) > 0;
     }
 
 }

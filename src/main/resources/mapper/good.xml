@@ -46,10 +46,6 @@
         where id in
         <foreach collection="ids" open="(" close=")" separator="," item="id">#{id}</foreach>
     </delete>
-    <select id="findGoodById" resultType="Good" useCache="true">
-        <include refid="Columns"></include>
-        <where>id=#{id}</where>
-    </select>
     <insert id="addGood" flushCache="true">
         insert into t_good(sku_no, name, alias, summary, category_id, brand_id, mark_price, price, qty, pic, other_pics,
                            detail, description, created_time, created_by)
@@ -107,4 +103,10 @@
             id = #{id}
         </where>
     </update>
+
+
+    <select id="findGoodById" resultType="Good" useCache="true">
+        <include refid="Columns"></include>
+        <where>id=#{id}</where>
+    </select>
 </mapper>

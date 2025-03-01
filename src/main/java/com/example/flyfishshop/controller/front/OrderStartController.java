@@ -6,7 +6,7 @@ import com.example.flyfishshop.model.User;
 import com.example.flyfishshop.service.OrderService;
 import com.example.flyfishshop.service.UserAddressService;
 import com.example.flyfishshop.util.JsonResult;
-import com.example.flyfishshop.util.OrderDataPatch;
+import com.example.flyfishshop.util.validate.OrderDataPatch;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -41,7 +41,6 @@ public class OrderStartController {
         User currentUser = (User) session.getAttribute(UserLoginInterceptor.USER_LOGIN_IDENTIFY);
         Order order = new Order();
         order.setMemberId(currentUser.getId());
-        // 在controller获得用户信息后进入服务层
         boolean success = orderService.createOrder(order, ids);
         if (success) {
             return ResponseEntity.ok(JsonResult.success("成功创建订单", order.getId()));
