@@ -89,7 +89,9 @@ public class IndexController {
         response.setHeader("Pragma", "No-cache");
         response.setHeader("Cache-Control", "no-cache");
         response.setDateHeader("Expires", 0L);
+
         request.getSession().setAttribute("captcha", captcha.text().toLowerCase());// 已经放到请求与中了
+
         captcha.out(response.getOutputStream());
     }
     // 忘记密码跳转

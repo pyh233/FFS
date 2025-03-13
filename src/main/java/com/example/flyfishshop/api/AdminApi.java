@@ -51,7 +51,7 @@ public class AdminApi {
         }
     }
     @PostMapping
-    public ResponseEntity<JsonResult> add(@Validated(CommonAddGroup.class) Admin admin) {
+    public ResponseEntity<JsonResult> add(@RequestBody @Validated(CommonAddGroup.class) Admin admin) {
         boolean success = adminService.insert(admin);
         if(success){
             return ResponseEntity.ok(JsonResult.success("成功添加一条信息",null));

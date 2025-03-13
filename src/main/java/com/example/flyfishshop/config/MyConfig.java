@@ -16,8 +16,9 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 
 @Configuration
-// 在配置项目中添加允许缓存 可以使用AOP缓存Service层.
+// 在配置项目中添加允许Spring缓存.
 @EnableCaching
+// 允许在Service层中获取自己的代理类
 @EnableAspectJAutoProxy(exposeProxy = true, proxyTargetClass = true)
 @EnableTransactionManagement
 public class MyConfig implements WebMvcConfigurer {

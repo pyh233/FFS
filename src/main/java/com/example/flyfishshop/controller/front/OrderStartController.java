@@ -59,12 +59,12 @@ public class OrderStartController {
         }
         // 基础订单
         model.addAttribute("order", order);
-        // 用户的所有收获信息
-        model.addAttribute("addressList", userAddressService.findUserAddressByUid(order.getMemberId()));
+        // 用户的所有收获信息 NOTE:通过api接口异步访问，可以减轻服务器压力?
+//        model.addAttribute("addressList", userAddressService.findUserAddressByUid(order.getMemberId()));
         return "front/checkout";
     }
 
-    // 完善订单，添加订单信息,收货人。。。
+    // 完善订单，添加订单信息,收货人。。。准备发起支付宝请求
     @PatchMapping("/order/patch")
     @ResponseBody
     public ResponseEntity<JsonResult> updateOrder(@Validated(OrderDataPatch.class) Order order, Integer streetId, HttpSession session) {

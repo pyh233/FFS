@@ -1,3 +1,5 @@
+const dropdown = layui.dropdown;
+const tree = layui.tree;
 $(() => {
 
     // 省份列表
@@ -60,6 +62,65 @@ $(() => {
     });
     loadBillData();
     patchOrderAndPutOnPay();
+
+    // 已有地址渲染
+    dropdown.render({
+        id: 'dw',
+        elem: "#renderAddress",
+        content: '<div id="category-tree"></div>',
+        // 渲染结束
+        ready: function (elemPanel, elem) {
+            let url = ctx + "/front/api/v1/my/save/address?userId="+order.memberId;
+            $.ajax({
+                url,
+                method: "get",
+                success(resp) {
+                    let data = resp.data;
+                    for(let i=0;i<data.length;i++){
+                        data[i].tmpAdd = data[i].address.addressStr + data[i].detail +data[i].receiver;
+                    }
+                    tree.render({
+                        elem: "#category-tree",
+                        data: data,
+                        onlyIconControl: true,
+                        customName: {
+                            id: "id",
+                            title: "tmpAdd"
+                        },
+                        click: function (obj) {
+                            let data = obj.data;
+                            console.log(data);
+
+
+                            // 获取已有信息,除了备注都不能缺少
+                            $("[name=receiver]").val(data.receiver);
+                            $("[name=receiverPhone]").val(data.phone);
+                            $("[name=detail]").val(data.detail);
+                            let tmpAddrStrS = data.tmpAdd.split(" ");
+                            $("[name=province]").val(tmpAddrStrS[0]);
+                            $("[name=province]").next().find(".current").text(tmpAddrStrS[0]);
+
+                            $("[name=city]").val(tmpAddrStrS[1])
+                            $("[name=city]").next().find(".current").text(tmpAddrStrS[1]);
+
+                            $("[name=area]").val(tmpAddrStrS[2]);
+                            $("[name=area]").next().find(".current").text(tmpAddrStrS[2]);
+
+                            $("[name=street]").val(tmpAddrStrS[3])
+                            $("[name=street]").next().find(".current").text(tmpAddrStrS[3]);
+
+                            window.streetId = data.streetId;
+                            dropdown.close("dw");
+                        }
+                    });
+                },
+                error(resp) {
+                    let json = resp.responseJSON;
+                    layer.msg(json.msg || "渲染失败");
+                }
+            });
+        }
+    });
 });
 
 function renderProvinceData($ul) {

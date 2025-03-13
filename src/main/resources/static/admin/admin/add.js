@@ -44,26 +44,48 @@ $(() => {
         done: function (resp) {
             // 成功则显示图片并且将url存储下来后面提交使用
             // TODO:预览图片而不是直接提交图片，只有选择提交后才会把图片提交
-            if(resp.success){
+            if (resp.success) {
                 let url = ctx + "/static/" + resp.data;
                 $(".avatar-preview").css("background-image", "url(" + url + ")");
 
-                sessionStorage.setItem("avatar_url",resp.data);
-            }else{
+                sessionStorage.setItem("avatar_url", resp.data);
+            } else {
                 layer.msg("上传图片失败");
             }
         },
         error: function (resp) {
             layer.msg("上传图片失败!");
         },
-        progress: function(n, elem, e){
+        progress: function (n, elem, e) {
             element.progress('filter-demo', n + '%'); // 可配合 layui 进度条元素使用
-            if(n == 100){
+            if (n == 100) {
                 layer.msg('上传完毕', {icon: 1});
             }
         }
     })
 })
+
+//  NOTE:取消上传删除图片功能
+function cancelSubmit() {
+    let fileUrl = sessionStorage.getItem("avatar_url");
+    let url = ctx + "/admin/api/v1/upload/cancel";
+    $.ajax({
+        url,
+        method: "delete",
+        data:{
+          fileUrl
+        },
+        dataType: "json",
+        success(resp) {
+            console.log("0");
+        },
+        error(resp){
+            console.log("1");
+        }
+    });
+    sessionStorage.removeItem("avatar_url");
+}
+
 // 添加事件
 function doSubmit(cb) {
     // 提交前在前端进行参数验证
@@ -79,23 +101,24 @@ function doSubmit(cb) {
         formData.avatarUrl = avatar_url;
         sessionStorage.removeItem("avatar_url");
     }
-
-
+    // NOTE:请求体传递JSON数据测试(练习)
+    formData = JSON.stringify(formData);
     const url = ctx + "/admin/api/v1/admin";
     $.ajax({
         url,
         method: "post",
         dataType: "json",
+        contentType: "application/json",
         data: formData,
         success(resp) {
             if (typeof cb === "function") {
                 cb(resp.success);
             }
         },
-        error(resp){
-            if(resp.status === 401){
-                location.href = ctx +"/admin/login";
-            }else {
+        error(resp) {
+            if (resp.status === 401) {
+                location.href = ctx + "/admin/login";
+            } else {
                 layer.msg(resp.responseJSON.msg);
             }
         }

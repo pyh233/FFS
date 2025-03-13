@@ -5,10 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -52,5 +49,18 @@ public class UploadApi {
 
         JsonResult jr = JsonResult.success("保存成功", type + "/" + fileName);
         return ResponseEntity.ok(jr);
+    }
+    @DeleteMapping("/cancel")
+    public ResponseEntity<JsonResult> cancelUpload(String fileUrl) throws IOException {
+        File file = new File(uploadLocation + fileUrl);
+        if(!file.exists()) {
+            return ResponseEntity.ofNullable(JsonResult.fail("000"));
+        }
+        boolean success = file.delete();
+        if(success) {
+            return ResponseEntity.ok(JsonResult.success("000",null));
+        }else{
+            return ResponseEntity.ofNullable(JsonResult.fail("111"));
+        }
     }
 }

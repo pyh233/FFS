@@ -1,6 +1,7 @@
 package com.example.flyfishshop.api.front;
 
 import com.example.flyfishshop.service.AddressService;
+import com.example.flyfishshop.service.UserAddressService;
 import com.example.flyfishshop.util.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -10,9 +11,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/front/api/v1",produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/front/api/v1", produces = MediaType.APPLICATION_JSON_VALUE)
 public class AddressApi {
     AddressService addressService;
+    UserAddressService userAddressService;
+
+    @Autowired
+    public void setUserAddressService(UserAddressService userAddressService) {
+        this.userAddressService = userAddressService;
+    }
 
     @Autowired
     public void setAddressService(AddressService addressService) {
@@ -21,33 +28,38 @@ public class AddressApi {
 
     @GetMapping("/province")
     public ResponseEntity<JsonResult> province() {
-        return ResponseEntity.ok(JsonResult.success("success",addressService.findAllProvince()));
+        return ResponseEntity.ok(JsonResult.success("success", addressService.findAllProvince()));
     }
 
     @GetMapping("/city")
     public ResponseEntity<JsonResult> city(Integer provinceId) {
-        if(provinceId == null) {
+        if (provinceId == null) {
             return ResponseEntity.badRequest().body(JsonResult.fail("请先选择省份"));
-        }else {
-            return ResponseEntity.ok(JsonResult.success("ok",addressService.findAllCity(provinceId)));
+        } else {
+            return ResponseEntity.ok(JsonResult.success("ok", addressService.findAllCity(provinceId)));
         }
     }
 
     @GetMapping("/area")
     public ResponseEntity<JsonResult> area(Integer cityId) {
-        if(cityId == null) {
+        if (cityId == null) {
             return ResponseEntity.badRequest().body(JsonResult.fail("请先选择市区"));
-        }else {
-            return ResponseEntity.ok(JsonResult.success("ok",addressService.findAllArea(cityId)));
+        } else {
+            return ResponseEntity.ok(JsonResult.success("ok", addressService.findAllArea(cityId)));
         }
     }
 
     @GetMapping("/street")
     public ResponseEntity<JsonResult> street(Integer areaId) {
-        if(areaId == null) {
+        if (areaId == null) {
             return ResponseEntity.badRequest().body(JsonResult.fail("请先选择区域"));
-        }else {
-            return ResponseEntity.ok(JsonResult.success("ok",addressService.findAllStreet(areaId)));
+        } else {
+            return ResponseEntity.ok(JsonResult.success("ok", addressService.findAllStreet(areaId)));
         }
+    }
+
+    @GetMapping("/my/save/address")
+    public ResponseEntity<JsonResult> mySave(Integer userId) {
+        return ResponseEntity.ok(JsonResult.success("sc", userAddressService.findUserAddressByUid(userId)));
     }
 }
